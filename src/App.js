@@ -10,7 +10,6 @@ const Conntainer = styled.View`
   backgroundColor: #F5FCFF;
 `;
 
-
 const App = () => (
   <Conntainer>
     <StyledText>Hello World!</StyledText>
