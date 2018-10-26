@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 
-import { actions } from '../../redux/auth';
+import { actions } from 'redux/auth';
 
 import * as S from './styled';
 
