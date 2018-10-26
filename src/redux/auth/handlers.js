@@ -8,3 +8,5 @@ const initialState = {
 export const action = state => ({ ...state });
 
 export const setInitialState = () => ({ ...initialState });
+
+export default initialState;
