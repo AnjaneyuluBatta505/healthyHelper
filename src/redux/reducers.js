@@ -3,7 +3,7 @@ import {
   createNavigationReducer,
 } from 'react-navigation-redux-helpers';
 
-import AppNavigator from '../router';
+import AppNavigator from 'router';
 
 import { action } from './auth/handlers';
 

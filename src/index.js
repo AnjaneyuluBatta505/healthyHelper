@@ -2,8 +2,8 @@ import React from 'react';
 import { Provider, connect } from 'react-redux';
 import { reduxifyNavigator } from 'react-navigation-redux-helpers';
 
-import configureStore from './redux/configureStore';
-import AppNavigator from './router';
+import configureStore from 'redux/configureStore';
+import AppNavigator from 'router';
 
 
 const App = reduxifyNavigator(AppNavigator, 'root');
