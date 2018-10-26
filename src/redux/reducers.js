@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import { reduser } from './auth/handlers';
+import { action } from './auth/handlers';
 
 const rootReducer = combineReducers({
-  reduser,
+  action,
 });
 
 export default rootReducer;
