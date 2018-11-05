@@ -6,7 +6,9 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "dev": "react-devtools",
-    "launch": "react-native run-android"
+    "launch": "react-native run-android",
+    "precommit": "lint-staged",
+    "lint": "./node_modules/.bin/eslint ./src/**/*.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -26,7 +28,9 @@
     "react-redux": "^5.0.7",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.3",
+    "redux-devtools-extension": "^2.13.5",
     "redux-saga": "^0.16.2",
+    "remote-redux-devtools": "^0.5.13",
     "reselect": "^4.0.0",
     "styled-components": "^4.0.2"
   },
