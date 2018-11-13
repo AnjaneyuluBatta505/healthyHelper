@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { bindActionCreators, compose } from 'redux';
 
 import { actions } from '../../redux/auth';
@@ -7,22 +8,50 @@ import { actions } from '../../redux/auth';
 import * as S from './styled';
 
 class Overview extends Component {
-  handleClick = () => {}
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Overview',
+    };
+  };
+
+  handleClick = (id) => {
+    const { navigation } = this.props;
+    if (id === '0') {
+      navigation.navigate('Drugs', {
+        headerTitle: 'Overview',
+      });
+    }
+  }
 
   render() {
-    console.log(this.props);
+    const { overview } = this.props;
     return (
       <S.Container>
-        <S.StyledText>
-          Some data
-        </S.StyledText>
+        {
+          overview.data.map(el => (
+            <S.Item key={el.id} onPress={() => this.handleClick(el.id)}>
+              <S.StyledText>
+                {el.name}
+              </S.StyledText>
+            </S.Item>
+          ))
+        }
       </S.Container>
     );
   }
 }
 
+Overview.defaultProps = {
+  // overview: [],
+};
+
+Overview.propTypes = {
+  // overview: PropTypes.arrayOf(),
+};
+
 const mapStateToProps = state => ({
-  state,
+  overview: state.overview,
+  state
 });
 
 const mapDispatchToProps = dispatch => ({

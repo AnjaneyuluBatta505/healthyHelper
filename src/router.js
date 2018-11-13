@@ -1,9 +1,26 @@
 import { createStackNavigator } from 'react-navigation';
 
 import Overview from './modules/overview';
+import Drugs from './modules/overview/Drugs';
+import ListOfDrugs from './modules/overview/Drugs/ListOfDrugs';
 
-export default createStackNavigator({
-  Overview: {
-    screen: Overview,
+export default createStackNavigator(
+  {
+    Home: Overview,
+    Drugs,
+    ListOfDrugs,
   },
-});
+  {
+    initialRouteName: 'Home',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: '#6b52ae',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 18,
+      },
+    },
+  },
+);
