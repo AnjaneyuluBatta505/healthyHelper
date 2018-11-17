@@ -3,19 +3,17 @@ import { createNavigationReducer } from 'react-navigation-redux-helpers';
 
 import AppNavigator from '../router';
 
-import authActions from './auth/index';
-import overActions from './overview';
+import auth from './auth/index';
+import overview from './overview';
+import drugs from './overview/drugs';
 
 const navReducer = createNavigationReducer(AppNavigator);
 
-const reducer = combineReducers({
-  auth: authActions,
-  overActions,
-});
-
 const rootReducer = combineReducers({
   nav: navReducer,
-  reducer,
+  auth,
+  overview,
+  drugs,
 });
 
 export default rootReducer;
