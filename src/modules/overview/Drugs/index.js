@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { bindActionCreators, compose } from 'redux';
+import { bindActionCreators } from 'redux';
 
 import { actions } from '../../../redux/auth';
 
 import * as S from './styled';
 
 class Drugs extends Component {
+  static propTypes = {
+    navigation: PropTypes.shape({}).isRequired,
+    drugs: PropTypes.shape({}).isRequired,
+  }
+
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.getParam('headerTitle', '')} > Drugs`,
   })
 
-  handleClick = (i) => {
+  handleClick = (id, i) => {
     const { navigation, drugs } = this.props;
     navigation.navigate('ListOfDrugs', {
       headerTitle: `${navigation.getParam('headerTitle', '')} > Drugs > ${drugs.data[i].name}`,
-      id: i,
+      id,
     });
   }
 
@@ -26,7 +31,7 @@ class Drugs extends Component {
       <S.Container>
         {
           drugs.data.map((el, i) => (
-            <S.Item key={i} onPress={() => this.handleClick(i)}>
+            <S.Item key={el.id} onPress={() => this.handleClick(el.id, i)}>
               <S.StyledText>{el.name}</S.StyledText>
             </S.Item>
           ))
@@ -35,14 +40,6 @@ class Drugs extends Component {
     );
   }
 }
-
-Drugs.defaultProps = {
-  // overview: [],
-};
-
-Drugs.propTypes = {
-  // overview: PropTypes.arrayOf(),
-};
 
 const mapStateToProps = ({ drugs }) => ({
   drugs,
@@ -54,6 +51,4 @@ const mapDispatchToProps = dispatch => ({
   }, dispatch),
 });
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-)(Drugs);
+export default connect(mapStateToProps, mapDispatchToProps)(Drugs);

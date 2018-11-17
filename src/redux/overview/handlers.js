@@ -1,31 +1,31 @@
 const initialState = {
   data: [
     {
-      id: '0',
+      id: `$_${Math.random().toString(36).substr(2, 9)}`,
       name: 'Лечебные средства',
     },
     {
-      id: '1',
+      id: `$_${Math.random().toString(36).substr(2, 9)}`,
       name: 'Проверка взаимодействия',
     },
     {
-      id: '2',
+      id: `$_${Math.random().toString(36).substr(2, 9)}`,
       name: 'Лечебные тесты',
     },
     {
-      id: '3',
+      id: `$_${Math.random().toString(36).substr(2, 9)}`,
       name: 'Альтернативная медицина',
     },
     {
-      id: '4',
+      id: `$_${Math.random().toString(36).substr(2, 9)}`,
       name: 'Диагностическая информация',
     },
     {
-      id: '5',
+      id: `$_${Math.random().toString(36).substr(2, 9)}`,
       name: 'Медицинские калькуляторы',
     },
     {
-      id: '6',
+      id: `$_${Math.random().toString(36).substr(2, 9)}`,
       name: 'Идентификация таблетки',
     },
   ],

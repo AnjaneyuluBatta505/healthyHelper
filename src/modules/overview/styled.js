@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 export const StyledText = styled.Text`
   color: ${({ theme }) => theme.mono.dark};
   fontSize: 14;
+  textAlign: center;
 `;
 
 export const Container = styled.View`
@@ -23,12 +24,11 @@ export const Container = styled.View`
 `;
 
 export const Item = styled.TouchableOpacity`
-  height: 25%;
-  width: 30.3%;
-  borderRadius: 10;
-  borderWidth: 2;
-  borderColor: ${({ theme }) => theme.primary};
-  marginTop: 5;
+height: 25%;
+width: 30.3%;
+borderRadius: 10;
+borderWidth: 2;
+borderColor: ${({ theme }) => theme.primary};marginTop: 5;
   marginLeft: 5;
   marginRight: 5;
   marginBottom: 5;

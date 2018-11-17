@@ -10,6 +10,11 @@
     "precommit": "lint-staged",
     "lint": "./node_modules/.bin/eslint ./src/**/*.js"
   },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ]
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",

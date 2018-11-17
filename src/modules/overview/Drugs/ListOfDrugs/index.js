@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import { FlatList, Text } from 'react-native';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { bindActionCreators, compose } from 'redux';
+import { FlatList } from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { actions } from '../../../../redux/auth';
+import getListOfDrugs from './selectors';
 
 import * as S from './styled';
 
 class ListOfDrugs extends Component {
+  static propTypes = {
+    navigation: PropTypes.shape({}).isRequired,
+    drugs: PropTypes.shape({}).isRequired,
+  }
+
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.getParam('headerTitle', '')}`,
   })
@@ -17,27 +23,36 @@ class ListOfDrugs extends Component {
     searchString: '',
   }
 
+  handleClick = (id) => {
+    const { navigation } = this.props;
+    const groupId = navigation.getParam('id');
+    navigation.navigate('Drug', {
+      headerTitle: `${navigation.getParam('headerTitle', '')} > Drugs > ${'as'}`,
+      drugId: id,
+      groupId,
+    });
+  }
+
   render() {
-    const { drugs, navigation } = this.props;
+    const { drugs } = this.props;
     const { searchString } = this.state;
-    const id = navigation.getParam('id');
-    const info = drugs.data[id].saleNaming;
-    console.log(searchString)
+
+    const info = drugs.saleNaming;
+
     return (
       <S.Container>
         <S.InputContainer>
           <S.StyledInput
-            placeholder="find"
+            placeholder="Search text"
             value={searchString}
             onChangeText={text => this.setState({ searchString: text })}
           />
         </S.InputContainer>
         <FlatList
-        // style={{ flex: 1, }}
           data={info}
           renderItem={({ item }) => (
-            <S.StyledItemOfList>
-              <Text>* {item.name}</Text>
+            <S.StyledItemOfList key={item.id} onPress={() => this.handleClick(item.id)}>
+              <S.StyledText key={item.id}>{item.name}</S.StyledText>
             </S.StyledItemOfList>
           )}
         />
@@ -46,17 +61,12 @@ class ListOfDrugs extends Component {
   }
 }
 
-ListOfDrugs.defaultProps = {
-  // overview: [],
+const mapStateToProps = ({ drugs }, { navigation }) => {
+  const id = navigation.getParam('id');
+  return ({
+    drugs: getListOfDrugs({ drugs, id }),
+  });
 };
-
-ListOfDrugs.propTypes = {
-  // overview: PropTypes.arrayOf(),
-};
-
-const mapStateToProps = ({ drugs }) => ({
-  drugs,
-});
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
@@ -64,6 +74,4 @@ const mapDispatchToProps = dispatch => ({
   }, dispatch),
 });
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-)(ListOfDrugs);
+export default connect(mapStateToProps, mapDispatchToProps)(ListOfDrugs);
