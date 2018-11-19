@@ -20,7 +20,7 @@ class Drugs extends Component {
   handleClick = (id, i) => {
     const { navigation, drugs } = this.props;
     navigation.navigate('ListOfDrugs', {
-      headerTitle: `${navigation.getParam('headerTitle', '')} > Drugs > ${drugs.data[i].name}`,
+      headerTitle: `${navigation.getParam('headerTitle', '')} > Препараты > ${drugs.data[i].name}`,
       id,
     });
   }

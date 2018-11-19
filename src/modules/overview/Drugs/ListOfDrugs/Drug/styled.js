@@ -10,6 +10,12 @@ export const BoldText = styled.Text`
   fontSize: 18;
 `;
 
+export const Header = styled.Text`
+  color: ${({ theme }) => theme.mono.dark};
+  fontSize: 18;
+  fontWeight: bold;
+`;
+
 export const Container = styled.View`
   display: flex;
   justifyContent: flex-start;
@@ -19,13 +25,21 @@ export const Container = styled.View`
   marginLeft: 5;
   marginRight: 5;
   marginBottom: 5;
-  paddingTop: 5;
-  paddingLeft: 5;
-  paddingRight: 5;
-  paddingBottom: 5;
+  paddingTop: 10;
+  paddingLeft: 10;
+  paddingRight: 10;
+  paddingBottom: 10;
 `;
 
-export const JeneralInfoWrap = styled.View``;
+export const Wrapp = styled.View`
+  backgroundColor: rgb(255, 255, 255);
+  marginBottom: 5;
+  paddingTop: 10;
+  paddingLeft: 10;
+  paddingRight: 10;
+  paddingBottom: 10;
+  borderRadius: 5;
+`;
 
 export const DrugName = styled.Text``;
 
