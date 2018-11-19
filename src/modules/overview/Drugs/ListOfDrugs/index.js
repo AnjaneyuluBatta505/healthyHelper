@@ -27,7 +27,7 @@ class ListOfDrugs extends Component {
     const { navigation } = this.props;
     const groupId = navigation.getParam('id');
     navigation.navigate('Drug', {
-      headerTitle: `${navigation.getParam('headerTitle', '')} > Drugs > ${'as'}`,
+      headerTitle: `${navigation.getParam('headerTitle', '')} > Препараты > ${'as'}`,
       drugId: id,
       groupId,
     });

@@ -2,14 +2,14 @@ import styled from 'styled-components/native';
 
 export const StyledText = styled.Text`
   color: ${({ theme }) => theme.mono.dark};
-  fontSize: 14;
+  fontSize: 16;
   textAlign: center;
 `;
 
 export const Container = styled.View`
-  flex: 1;
+  display: flex;
   flexWrap: wrap;
-  height: 100;
+  height: 100%;
   flexDirection: row;
   backgroundColor: #F5FCFF;
   justifyContent: flex-start;
@@ -24,6 +24,9 @@ export const Container = styled.View`
 `;
 
 export const Item = styled.TouchableOpacity`
+  display: flex;
+  justifyContent: center;
+  backgroundColor: rgb(245, 245, 245);
   height: 25%;
   width: 30.3%;
   borderRadius: 10;

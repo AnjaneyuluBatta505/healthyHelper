@@ -35,11 +35,21 @@ class Overview extends Component {
 
   handleClick = (i) => {
     const { navigation } = this.props;
-    if (i === 0) {
-      navigation.navigate('Drugs', {
-        headerTitle: 'Overview',
-      });
+    switch (i) {
+      case 0:
+        navigation.navigate('Drugs', {
+          headerTitle: 'Overview',
+        });
+        break;
+      case 4:
+        navigation.navigate('TestsForm', {
+          headerTitle: 'Overview',
+        });
+        break;
+      default:
+        return null;
     }
+    return null;
   }
 
   // handleClickOnBtn = () => {
