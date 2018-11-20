@@ -1,5 +1,5 @@
 const theme = {
-  primary: '#56CCF2',
+  primary: '#7a42f4',
   fontFamily: 'Roboto',
   mono: {
     dark: '#31373D',
