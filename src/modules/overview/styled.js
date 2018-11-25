@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const StyledText = styled.Text`
-  color: ${({ theme }) => theme.mono.dark};
+  color: ${({ theme }) => theme.miTheme.mono.dark};
   fontSize: 14;
   textAlign: center;
 `;
@@ -28,7 +28,8 @@ export const Item = styled.TouchableOpacity`
   width: 30.3%;
   borderRadius: 10;
   borderWidth: 2;
-  borderColor: ${({ theme }) => theme.primary};marginTop: 5;
+  borderColor: ${({ theme }) => theme.miTheme.primary};
+  marginTop: 5;
   marginLeft: 5;
   marginRight: 5;
   marginBottom: 5;
