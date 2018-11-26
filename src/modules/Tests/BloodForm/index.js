@@ -1,8 +1,58 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { Text, TextInput, View, Button } from 'react-native';
 
 import * as S from './styled';
+
+const indicators = {
+  glucose: {
+    value: '',
+    info: 'ммоль/л',
+    error: '',
+    flag: false,
+    label: 'Глюкоза',
+  },
+  hemoglobin: {
+    value: '',
+    info: 'g/dL',
+    error: '',
+    flag: false,
+    label: 'Конц. гемоглобина',
+  },
+  leukocytes: {
+    value: '',
+    info: '*10^3/μL',
+    error: '',
+    flag: false,
+    label: 'Конц. лейкоцитов',
+  },
+  erythrocytes: {
+    value: '',
+    info: '*10^3/μL',
+    error: '',
+    flag: false,
+    label: 'Кол-во эритроцитов',
+  },
+  hematocrit: {
+    value: '',
+    info: '%',
+    flag: false,
+    label: 'Гематокрит',
+  },
+  numbPlatelets: {
+    value: '',
+    info: '*10^3/μL',
+    error: '',
+    flag: false,
+    label: 'Кол-во тромбоцитов',
+  },
+  esr: {
+    value: '',
+    info: 'мм/час',
+    error: '',
+    flag: false,
+    label: 'СОЭ',
+  },
+};
 
 class BloodForm extends Component {
   static propTypes = {
@@ -11,98 +61,79 @@ class BloodForm extends Component {
 
   static navigationOptions = () => ({ title: 'Анализ Крови' });
 
-  state = {
-    glucose: '',
-    hemoglobin: '',
-    leukocytes: '',
-    erythrocytes: '',
-    hematocrit: '',
-    numbPlatelets: '',
-    esr: '',
+  state = { ...indicators }
+
+  handleChange = (key, value) => {
+    const { state } = this;
+    if (state[key].flag) {
+      return this.setState(prevState => ({
+        [key]: {
+          ...prevState[key],
+          flag: false,
+          error: '',
+          value,
+        },
+      }));
+    }
+
+    return this.setState(
+      prevState => ({ [key]: { ...prevState[key], value } }),
+    );
   }
 
-  handleChange = (key, value) => this.setState({ [key]: value })
+  checkOnEmptyString = el => this.setState(prevState => ({
+    [el]: {
+      ...prevState[el],
+      flag: true,
+      error: 'Пустая строка',
+    },
+  }))
 
   handleClick = () => {
-    console.log('1')
+    Object.keys(this.state).forEach((el) => {
+      const { state } = this;
+      if (!state[el].value) {
+        this.checkOnEmptyString(el);
+      }
+    });
   }
 
   render() {
-    // const { navigation } = this.props;
-    const {
-      glucose,
-      hemoglobin,
-      leukocytes,
-      erythrocytes,
-      hematocrit,
-      numbPlatelets,
-      esr,
-    } = this.state;
-    // const route = navigation.getParam('route')
     return (
-      <S.Container>
-        <S.InputWrapper>
-          <S.Label>Глюкоза</S.Label>
-          <S.Input
-            value={glucose}
-            onChangeText={text => this.handleChange('glucose', text)}
-          />
-          <S.Label>*10^3/μL</S.Label>
-        </S.InputWrapper>
-        <S.InputWrapper>
-          <S.Label>Гемоглобин</S.Label>
-          <S.Input
-            value={hemoglobin}
-            onChangeText={text => this.handleChange('hemoglobin', text)}
-          />
-          <S.Label>*10^3/μL</S.Label>
-        </S.InputWrapper>
-        <S.InputWrapper>
-          <S.Label>Лейкоциты</S.Label>
-          <S.Input
-            value={leukocytes}
-            onChangeText={text => this.handleChange('leukocytes', text)}
-          />
-          <S.Label>*10^3/μL</S.Label>
-        </S.InputWrapper>
-        <S.InputWrapper>
-          <S.Label>Эритроциты</S.Label>
-          <S.Input
-            value={erythrocytes}
-            onChangeText={text => this.handleChange('erythrocytes', text)}
-          />
-          <S.Label>*10^3/μL</S.Label>
-        </S.InputWrapper>
-        <S.InputWrapper>
-          <S.Label>Гематокрит</S.Label>
-          <S.Input
-            value={hematocrit}
-            onChangeText={text => this.handleChange('hematocrit', text)}
-          />
-          <S.Label>*10^3/μL</S.Label>
-        </S.InputWrapper>
-        <S.InputWrapper>
-          <S.Label>Количество тромбоцитов</S.Label>
-          <S.Input
-            value={numbPlatelets}
-            onChangeText={text => this.handleChange('numbPlatelets', text)}
-          />
-          <S.Label>*10^3/μL</S.Label>
-        </S.InputWrapper>
-        <S.InputWrapper>
-          <S.Label>Скорость оседания эритроцитов</S.Label>
-          <S.Input
-            value={esr}
-            onChangeText={text => this.handleChange('esr', text)}
-          />
-          <S.Label>*10^3/μL</S.Label>
-        </S.InputWrapper>
-        <S.Button
-          onPress={() => this.handleClick()}
-        >
-          <S.BtnText>Проверить</S.BtnText>
-        </S.Button>
-      </S.Container>
+      <S.Wrapper>
+        <S.Container>
+          {
+            Object.keys(this.state).map((el) => {
+              const { state } = this;
+              const { info, value, error, flag, label } = state[el];
+
+              return (
+                <S.InputWrapper key={el}>
+                  <S.Input
+                    label={label}
+                    value={value}
+                    error={error && error}
+                    onChangeText={text => this.handleChange(`${el}`, text)}
+                  />
+                  <S.UnitText
+                    type={!flag ? 'info' : 'error'}
+                    visible="true"
+                  >
+                    {!flag ? info : error}
+                  </S.UnitText>
+                </S.InputWrapper>
+              );
+            })
+          }
+          <S.SButton
+            icon="search"
+            mode="contained"
+            onPress={this.handleClick}
+          >
+            Проверить
+          </S.SButton>
+        </S.Container>
+      </S.Wrapper>
     );
   }
 }

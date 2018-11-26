@@ -1,54 +1,44 @@
 import styled from 'styled-components/native';
+import { TextInput, HelperText, Button  } from 'react-native-paper';
 
-export const Label = styled.Text`
-  color: ${({ theme }) => theme.mono.dark};
-  fontSize: 14;
-  textAlign: center;
-  width: 100px;
+export const Input = styled(TextInput)`
+  marginRight: 0px;
+  width: 100%;
 `;
 
-export const BtnText = styled.Text`
-  color: ${({ theme }) => theme.mono.white};
-  fontSize: 14;
-  textAlign: center;
+export const UnitText = styled(HelperText)`
+  width: 100%;
 `;
 
 export const Container = styled.View`
   display: flex;
+  flexDirection: row;
+  flexWrap: wrap;
   height: 100%;
   width: 100%;
-  backgroundColor: #FFF;
-  justifyContent: flex-start;
+  justifyContent: space-around;
   alignItems: center;
   margin: 5px;
   padding: 5px;
-`;
-
-export const Input = styled.TextInput`
-  margin: 10px;
-  marginRight: 0px;
-  height: 40px
-  width: 200px;
-  borderColor: #7a42f4;
-  borderWidth: 1;
-  borderRadius: 5px;
-  padding: 10px;
+  paddingTop: 20px;
 `;
 
 export const InputWrapper = styled.View`
   display: flex;
-  flexDirection: row;
-  width: 100%;
-  alignItems: center;
+  flexDirection: column;
+  width: 45%;
   justifyContent: flex-start;
 `;
 
-export const Button = styled.TouchableOpacity`
-  height: 50px;
-  width: 250px;
-  backgroundColor: #7a42f4;
-  justifyContent: center;
-  borderRadius: 10px;
+export const SButton = styled(Button)`
+  width: 70%;
   marginTop: 40px;
-  padding: 5px;
+`;
+
+export const Wrapper = styled.View`
+  display: flex;
+  justifyContent: center;
+  height: 100%;
+  width: 100%;
+  backgroundColor: ${({ theme }) => theme.colors.background};
 `;

@@ -7,12 +7,11 @@ import BloodForm from './modules/Tests/BloodForm';
 import Drugs from './modules/overview/Drugs';
 import ListOfDrugs from './modules/overview/Drugs/ListOfDrugs';
 import Drug from './modules/overview/Drugs/ListOfDrugs/Drug';
-import ModalScreen from './modules/Tests/Modal';
 
 const headerStyles = {
   navigationOptions: {
     headerStyle: {
-      backgroundColor: '#6b52ae',
+      backgroundColor: '#6200ee',
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
@@ -38,42 +37,8 @@ const TestsStack = createStackNavigator(
     WeeForm,
     BloodForm,
   },
-  // {
-  //   mode: 'modal',
-  //   headerMode: 'none',
-  // },
-  // {
-  //   Main: {
-  //     screen: Tests,
-  //   },
-  //   Wee: {
-  //     screen: WeeForm,
-  //   },
-  //   Blood: {
-  //     screen: BloodForm,
-  //   },
-  // },
-  // MyModal: {
-  //   screen: ModalScreen,
-  // },
-  // {
-  //   mode: 'modal',
-  //   headerMode: 'none',
-  // },
   headerStyles,
-  // },
 );
-
-// const BloodStack = createStackNavigator(
-//   {
-//     Main: {
-//       screen: Tests,
-//     },
-//     MyModal: {
-//       screen: ModalScreen,
-//     },
-//   },
-// );
 
 export default createBottomTabNavigator(
   {
@@ -83,14 +48,7 @@ export default createBottomTabNavigator(
     Tests: {
       screen: TestsStack,
     },
-    // MyModal: {
-    //   screen: ModalScreen,
-    // },
   },
-  // {
-  //   mode: 'modal',
-  //   headerMode: 'none',
-  // },
   {
     initialRouteName: 'Tests',
     tabBarOptions: {
