@@ -12,7 +12,7 @@ const analysis = [
   {
     id: `$_${Math.random().toString(36).substr(2, 9)}`,
     value: 'Анализ крови',
-    route: 'blood',
+    route: 'BloodForm',
   },
   {
     id: `$_${Math.random().toString(36).substr(2, 9)}`,
@@ -36,7 +36,7 @@ class Tests extends Component {
   handleClick = (_id) => {
     const { navigation } = this.props;
     const { route } = analysis.filter(({ id }) => id === _id)[0];
-    navigation.navigate('BloodForm', {
+    navigation.navigate(route, {
       route,
     });
   }

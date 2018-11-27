@@ -1,8 +1,9 @@
 import styled from 'styled-components/native';
-import { TextInput, HelperText, Button  } from 'react-native-paper';
+import { TextInput, HelperText, Button, RadioButton } from 'react-native-paper';
+
+export const RadioBtn = styled(RadioButton)``;
 
 export const Input = styled(TextInput)`
-  marginRight: 0px;
   width: 100%;
 `;
 
@@ -16,10 +17,10 @@ export const Container = styled.View`
   flexWrap: wrap;
   height: 100%;
   width: 100%;
-  justifyContent: space-around;
+  justifyContent: space-between;
   alignItems: center;
   margin: 5px;
-  padding: 5px;
+  padding: 10px;
   paddingTop: 20px;
 `;
 
@@ -27,7 +28,7 @@ export const InputWrapper = styled.View`
   display: flex;
   flexDirection: column;
   width: 45%;
-  justifyContent: flex-start;
+  justifyContent: center;
 `;
 
 export const SButton = styled(Button)`

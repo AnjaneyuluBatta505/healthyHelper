@@ -23,10 +23,10 @@ class WeeForm extends Component {
     // const route = navigation.getParam('route')
     return (
       <S.Container>
-        <S.Input
-          // value={}
-          onChangeText={(text) => this.handleChange()}
-        />
+        {/* <S.Input */}
+        {/* value={} */}
+        {/* onChangeText={(text) => this.handleChange()} */}
+        {/* // /> */}
         {/* {
           analysis.map(({ id, value }) => (
             <S.Item
