@@ -7,34 +7,23 @@ export const StyledText = styled.Text`
 `;
 
 export const Container = styled.View`
-  flex: 1;
+  display: flex;
   flexWrap: wrap;
-  height: 100;
+  height: 100%;
   flexDirection: row;
   backgroundColor: #F5FCFF;
   justifyContent: flex-start;
-  marginTop: 5;
-  marginLeft: 5;
-  marginRight: 5;
-  marginBottom: 5;
-  paddingTop: 5;
-  paddingLeft: 5;
-  paddingRight: 5;
-  paddingBottom: 5;
+  margin: 5px;
+  padding: 5px;
 `;
 
 export const Item = styled.TouchableOpacity`
   height: 25%;
   width: 30.3%;
   borderRadius: 10;
+  justifyContent: center;
   borderWidth: 2;
   borderColor: ${({ theme }) => theme.miTheme.primary};
-  marginTop: 5;
-  marginLeft: 5;
-  marginRight: 5;
-  marginBottom: 5;
-  paddingTop: 5;
-  paddingLeft: 5;
-  paddingRight: 5;
-  paddingBottom: 5;
+  margin: 5px;
+  padding: 5px;
 `;

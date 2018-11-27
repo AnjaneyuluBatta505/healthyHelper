@@ -20,6 +20,7 @@
       "linebreak-style": "off",
       "no-unused-expressions": ["error", { "allowTaggedTemplates": true }],
       "react/jsx-one-expression-per-line": "off",
-      "object-curly-newline": "off"
+      "object-curly-newline": "off",
+      "no-shadow": "off"
     }
   }

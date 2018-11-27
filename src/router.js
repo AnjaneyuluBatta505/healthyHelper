@@ -1,26 +1,58 @@
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import Overview from './modules/overview';
+import Tests from './modules/Tests';
+import WeeForm from './modules/Tests/WeeForm';
+import BloodForm from './modules/Tests/BloodForm';
 import Drugs from './modules/overview/Drugs';
 import ListOfDrugs from './modules/overview/Drugs/ListOfDrugs';
 import Drug from './modules/overview/Drugs/ListOfDrugs/Drug';
 
-export default createStackNavigator(
+const headerStyles = {
+  navigationOptions: {
+    headerStyle: {
+      backgroundColor: '#6200ee',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+      fontSize: 18,
+    },
+  },
+};
+
+const HomeStack = createStackNavigator(
   {
     Home: Overview,
     Drugs,
     ListOfDrugs,
     Drug,
   },
+  headerStyles,
+);
+
+const TestsStack = createStackNavigator(
   {
-    initialRouteName: 'Home',
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: '#6b52ae',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
+    Tests,
+    WeeForm,
+    BloodForm,
+  },
+  headerStyles,
+);
+
+export default createBottomTabNavigator(
+  {
+    Home: {
+      screen: HomeStack,
+    },
+    Tests: {
+      screen: TestsStack,
+    },
+  },
+  {
+    initialRouteName: 'Tests',
+    tabBarOptions: {
+      labelStyle: {
         fontSize: 18,
       },
     },
