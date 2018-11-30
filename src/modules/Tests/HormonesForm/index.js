@@ -8,146 +8,108 @@ import * as S from './styled';
 
 const Indicators = [
   {
-    id: 'glucose',
+    id: 'wheyIron',
     value: '',
     info: '',
-    unit: 'ммоль/л',
+    unit: 'мкмоль/л',
     error: '',
     flag: 'unit',
-    label: 'Глюкоза',
+    label: 'Железо сыворочное',
     limits: {
       man: {
-        maxLimit: 5.3,
-        minLimit: 3.5,
+        maxLimit: 28.6,
+        minLimit: 10.7,
       },
       woman: {
-        maxLimit: 5.3,
-        minLimit: 3.5,
+        maxLimit: 25.9,
+        minLimit: 7.2,
       },
     },
   },
   {
-    id: 'hemoglobin',
+    id: 'ferritin',
     value: '',
     info: '',
-    unit: 'g/dL',
+    unit: 'мкг/л',
     error: '',
     flag: 'unit',
-    label: 'Конц. гемоглобина',
+    label: 'Ферритин',
     limits: {
       man: {
-        maxLimit: 17.5,
-        minLimit: 13,
+        maxLimit: 250,
+        minLimit: 20,
       },
       woman: {
-        maxLimit: 15.7,
-        minLimit: 12,
+        maxLimit: 120,
+        minLimit: 10,
       },
     },
   },
   {
-    id: 'leukocytes',
+    id: 'tsh',
     value: '',
     info: '',
-    unit: '*10^3/μL',
+    unit: 'мЕд/л',
     error: '',
     flag: 'unit',
-    label: 'Конц. лейкоцитов',
+    label: 'Тиреотропный гормон',
     limits: {
       man: {
-        maxLimit: 9,
-        minLimit: 4,
+        maxLimit: 4,
+        minLimit: 0.4,
       },
       woman: {
-        maxLimit: 9,
-        minLimit: 4,
+        maxLimit: 4,
+        minLimit: 0.4,
       },
     },
   },
   {
-    id: 'erythrocytes',
+    id: 'cortisol',
     value: '',
     info: '',
-    unit: '*10^3/μL',
+    unit: 'нмоль/л',
     error: '',
     flag: 'unit',
-    label: 'Кол-во эритроцитов',
+    label: 'Кортизол',
     limits: {
       man: {
-        maxLimit: 6.08,
-        minLimit: 4.9,
+        maxLimit: 635,
+        minLimit: 138,
       },
       woman: {
-        maxLimit: 5.1,
-        minLimit: 3.7,
+        maxLimit: 635,
+        minLimit: 138,
       },
     },
   },
   {
-    id: 'hematocrit',
+    id: 'prolactinum',
     value: '',
     info: '',
-    unit: '%',
+    unit: 'мЕд/л',
     flag: 'unit',
-    label: 'Гематокрит',
+    label: 'Пролактин',
     limits: {
       man: {
-        maxLimit: 50,
-        minLimit: 39,
+        maxLimit: 407,
+        minLimit: 73,
       },
       woman: {
-        maxLimit: 47,
-        minLimit: 35,
-      },
-    },
-  },
-  {
-    id: 'numbPlatelets',
-    value: '',
-    info: '',
-    unit: '*10^3/μL',
-    error: '',
-    flag: 'unit',
-    label: 'Кол-во тромбоцитов',
-    limits: {
-      man: {
-        maxLimit: 400,
-        minLimit: 150,
-      },
-      woman: {
-        maxLimit: 400,
-        minLimit: 150,
-      },
-    },
-  },
-  {
-    id: 'esr',
-    value: '',
-    info: '',
-    unit: 'мм/час',
-    error: '',
-    flag: 'unit',
-    label: 'СОЭ',
-    limits: {
-      man: {
-        maxLimit: 15,
-        minLimit: 2,
-      },
-      woman: {
-        maxLimit: 20,
-        minLimit: 2,
+        maxLimit: 557,
+        minLimit: 109,
       },
     },
   },
 ];
 
 
-class WeeForm extends Component {
+class HormonesForm extends Component {
   static propTypes = {
     navigation: PropTypes.shape({}).isRequired,
   }
 
-  static navigationOptions = () => ({ title: 'Анализ мочи' });
+  static navigationOptions = () => ({ title: 'Гормоны' });
 
   state = { indicators: [...Indicators], sex: 'man' }
 
@@ -277,4 +239,4 @@ class WeeForm extends Component {
   }
 }
 
-export default WeeForm;
+export default HormonesForm;
