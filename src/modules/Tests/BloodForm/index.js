@@ -139,7 +139,7 @@ const Indicators = [
       },
     },
   },
-]
+];
 
 class BloodForm extends Component {
   static propTypes = {
@@ -155,7 +155,6 @@ class BloodForm extends Component {
     const elem = indicators[indx];
 
     if (elem.flag === 'error' || elem.flag === 'info') {
-
       return this.setState(({ indicators }) => ({
         indicators: update(indicators, { [indx]: {
           value: { $set: value },

@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text } from 'react-native-paper';
 import { View } from 'react-native';
+import update from 'immutability-helper';
 
 import * as S from './styled';
 
-const Indicators = {
-  wheyIron: {
+const Indicators = [
+  {
+    id: 'wheyIron',
     value: '',
     info: '',
     unit: 'мкмоль/л',
@@ -24,7 +26,8 @@ const Indicators = {
       },
     },
   },
-  ferritin: {
+  {
+    id: 'ferritin',
     value: '',
     info: '',
     unit: 'мкг/л',
@@ -42,7 +45,8 @@ const Indicators = {
       },
     },
   },
-  tsh: {
+  {
+    id: 'tsh',
     value: '',
     info: '',
     unit: 'мЕд/л',
@@ -60,7 +64,8 @@ const Indicators = {
       },
     },
   },
-  cortisol: {
+  {
+    id: 'cortisol',
     value: '',
     info: '',
     unit: 'нмоль/л',
@@ -78,7 +83,8 @@ const Indicators = {
       },
     },
   },
-  prolactinum: {
+  {
+    id: 'prolactinum',
     value: '',
     info: '',
     unit: 'мЕд/л',
@@ -95,7 +101,8 @@ const Indicators = {
       },
     },
   },
-};
+];
+
 
 class HormonesForm extends Component {
   static propTypes = {
@@ -104,82 +111,58 @@ class HormonesForm extends Component {
 
   static navigationOptions = () => ({ title: 'Гормоны' });
 
-  state = { indicators: { ...Indicators }, sex: 'man' }
+  state = { indicators: [...Indicators], sex: 'man' }
 
-  handleChange = (key, value) => {
+  handleChange = (value, indx) => {
     const { indicators } = this.state;
-    const elem = indicators[key];
+    const elem = indicators[indx];
 
-    // if (elem.flag === 'error' || elem.flag === 'info') {
-    //   return this.setState(({ indicators }) => ({
-    //     indicators: {
-    //       ...indicators,
-    //       [key]: {
-    //         ...elem,
-    //         flag: 'unit',
-    //         error: '',
-    //         value,
-    //       },
-    //     },
-    //   }));
-    // }
+    if (elem.flag === 'error' || elem.flag === 'info') {
+      return this.setState(({ indicators }) => ({
+        indicators: update(indicators, { [indx]: {
+          value: { $set: value },
+          flag: { $set: 'unit' },
+          error: { $set: '' } },
+        }),
+      }));
+    }
 
-    this.setState(
-      ({ indicators }) => ({
-        indicators: {
-          ...indicators,
-          [key]: { ...elem, value },
-        },
-      }),
-    );
+    return this.setState(({ indicators }) => ({
+      indicators: update(indicators, { [indx]: { value: { $set: value } } }),
+    }));
   }
 
-  showEmptyStringError = el => this.setState(({ indicators }) => ({
-    indicators: {
-      ...indicators,
-      [el]: {
-        ...indicators[el],
-        flag: true,
-        error: 'Пустая строка',
-      },
-    },
-  }))
-
-  showInfo = (el, data) => this.setState(({ indicators }) => ({
-    indicators: {
-      ...indicators,
-      [el]: {
-        ...indicators[el],
-        ...data,
-      },
-    },
+  showInfo = (indx, { flag, error = '', info = '' }) => this.setState(({ indicators }) => ({
+    indicators: update(indicators, { [indx]: {
+      flag: { $set: flag },
+      error: { $set: error },
+      info: { $set: info },
+    } }),
   }))
 
   handleClick = () => {
     const { indicators, sex } = this.state;
 
-    Object.keys(indicators).forEach((el) => {
-      const { limits } = indicators[el];
-      const elem = indicators[el];
-      const { value } = elem;
+    indicators.forEach((el, i) => {
+      const { limits, value } = el;
 
       if (!value) {
-        return this.showInfo(el, { flag: 'error', error: 'Пустая строка' });
+        return this.showInfo(i, { flag: 'error', error: 'Пустая строка' });
       }
 
       if (Number.isNaN(parseInt(value, 10))) {
-        return this.showInfo(el, { flag: 'error', error: 'Недопустимый формат' });
+        return this.showInfo(i, { flag: 'error', error: 'Недопустимый формат' });
       }
 
       if (value > limits[sex].maxLimit) {
-        return this.showInfo(el, { flag: 'info', info: 'Превшена норма' });
+        return this.showInfo(i, { flag: 'info', info: 'Превшена норма' });
       }
 
       if (value < limits[sex].minLimit) {
-        return this.showInfo(el, { flag: 'info', info: 'Значение ниже нормы' });
+        return this.showInfo(i, { flag: 'info', info: 'Значение ниже нормы' });
       }
 
-      return this.showInfo(el, { flag: 'info', info: 'Норма' });
+      return this.showInfo(i, { flag: 'info', info: 'Норма' });
     });
   }
 
@@ -203,17 +186,16 @@ class HormonesForm extends Component {
       <S.Wrapper>
         <S.Container>
           {
-            Object.keys(indicators).map((el) => {
-              const { indicators } = this.state;
-              const { unit, value, error, flag, label, info } = indicators[el];
+            indicators.map((el, indx) => {
+              const { unit, value, error, flag, label, info, id } = el;
 
               return (
-                <S.InputWrapper key={el}>
+                <S.InputWrapper key={id}>
                   <S.Input
                     label={label}
                     value={value}
                     error={error && error}
-                    onChangeText={text => this.handleChange(`${el}`, text)}
+                    onChangeText={text => this.handleChange(text, indx)}
                   />
                   <S.UnitText
                     type={flag === 'unit' || flag === 'info' ? 'info' : 'error'}
