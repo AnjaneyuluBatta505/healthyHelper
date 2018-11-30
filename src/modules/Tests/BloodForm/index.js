@@ -133,6 +133,141 @@ const Indicators = {
   },
 };
 
+const Indicators2 = [
+  {
+    id: 'glucose',
+    value: '',
+    info: '',
+    unit: 'ммоль/л',
+    error: '',
+    flag: 'unit',
+    label: 'Глюкоза',
+    limits: {
+      man: {
+        maxLimit: 5.3,
+        minLimit: 3.5,
+      },
+      woman: {
+        maxLimit: 5.3,
+        minLimit: 3.5,
+      },
+    },
+  },
+  {
+    id: 'hemoglobin',
+    value: '',
+    info: '',
+    unit: 'g/dL',
+    error: '',
+    flag: 'unit',
+    label: 'Конц. гемоглобина',
+    limits: {
+      man: {
+        maxLimit: 17.5,
+        minLimit: 13,
+      },
+      woman: {
+        maxLimit: 15.7,
+        minLimit: 12,
+      },
+    },
+  },
+  {
+    id: 'leukocytes',
+    value: '',
+    info: '',
+    unit: '*10^3/μL',
+    error: '',
+    flag: 'unit',
+    label: 'Конц. лейкоцитов',
+    limits: {
+      man: {
+        maxLimit: 9,
+        minLimit: 4,
+      },
+      woman: {
+        maxLimit: 9,
+        minLimit: 4,
+      },
+    },
+  },
+  {
+    id: 'erythrocytes',
+    value: '',
+    info: '',
+    unit: '*10^3/μL',
+    error: '',
+    flag: 'unit',
+    label: 'Кол-во эритроцитов',
+    limits: {
+      man: {
+        maxLimit: 6.08,
+        minLimit: 4.9,
+      },
+      woman: {
+        maxLimit: 5.1,
+        minLimit: 3.7,
+      },
+    },
+  },
+  {
+    id: 'hematocrit',
+    value: '',
+    info: '',
+    unit: '%',
+    flag: 'unit',
+    label: 'Гематокрит',
+    limits: {
+      man: {
+        maxLimit: 50,
+        minLimit: 39,
+      },
+      woman: {
+        maxLimit: 47,
+        minLimit: 35,
+      },
+    },
+  },
+  {
+    id: 'numbPlatelets',
+    value: '',
+    info: '',
+    unit: '*10^3/μL',
+    error: '',
+    flag: 'unit',
+    label: 'Кол-во тромбоцитов',
+    limits: {
+      man: {
+        maxLimit: 400,
+        minLimit: 150,
+      },
+      woman: {
+        maxLimit: 400,
+        minLimit: 150,
+      },
+    },
+  },
+  {
+    id: 'esr',
+    value: '',
+    info: '',
+    unit: 'мм/час',
+    error: '',
+    flag: 'unit',
+    label: 'СОЭ',
+    limits: {
+      man: {
+        maxLimit: 15,
+        minLimit: 2,
+      },
+      woman: {
+        maxLimit: 20,
+        minLimit: 2,
+      },
+    },
+  },
+]
+
 class BloodForm extends Component {
   static propTypes = {
     navigation: PropTypes.shape({}).isRequired,
@@ -141,34 +276,43 @@ class BloodForm extends Component {
 
   static navigationOptions = () => ({ title: 'Анализ Крови' });
 
-  state = { indicators: { ...Indicators }, sex: 'man' }
+  state = { indicators: [...Indicators2], sex: 'man' }
 
-  handleChange = (key, value) => {
+  handleChange = (key, value, indx) => {
     const { indicators } = this.state;
-    const elem = indicators[key];
+    // if (elem.flag === 'error' || elem.flag === 'info') {
+    //   // indicators.map(elem => {
+    //   //   if (elem.flag === )
+    //   // })
+    //   return this.setState({
+    //     indicators: indicators.map(elem => (elem.id === key ? { ...elem, value } : elem)),
+    //   });
+    // }
+    return this.setState({
+      indicators: indicators.map(elem => (elem.id === key ? { ...elem, value } : elem)),
+    });
 
-    if (elem.flag === 'error' || elem.flag === 'info') {
-      return this.setState(({ indicators }) => ({
-        indicators: {
-          ...indicators,
-          [key]: {
-            ...elem,
-            flag: 'unit',
-            error: '',
-            value,
-          },
-        },
-      }));
-    }
+    //   return this.setState(({ indicators }) => ({
+    //     indicators: {
+    //       ...indicators,
+    //       [key]: {
+    //         ...elem,
+    //         flag: 'unit',
+    //         error: '',
+    //         value,
+    //       },
+    //     },
+    //   }));
+    // }
 
-    return this.setState(
-      ({ indicators }) => ({
-        indicators: {
-          ...indicators,
-          [key]: { ...elem, value },
-        },
-      }),
-    );
+    // return this.setState(
+    //   ({ indicators }) => ({
+    //     indicators: {
+    //       ...indicators,
+    //       [key]: { ...elem, value },
+    //     },
+    //   }),
+    // );
   }
 
   showEmptyStringError = el => this.setState(({ indicators }) => ({
@@ -240,17 +384,16 @@ class BloodForm extends Component {
       <S.Wrapper>
         <S.Container>
           {
-            Object.keys(indicators).map((el) => {
-              const { indicators } = this.state;
-              const { unit, value, error, flag, label, info } = indicators[el];
+            indicators.map((el, indx) => {
+              const { unit, value, error, flag, label, info, id } = el;
 
               return (
-                <S.InputWrapper key={el}>
+                <S.InputWrapper key={id}>
                   <S.Input
                     label={label}
                     value={value}
                     error={error && error}
-                    onChangeText={text => this.handleChange(`${el}`, text)}
+                    onChangeText={text => this.handleChange(`${id}`, text, indx)}
                   />
                   <S.UnitText
                     type={flag === 'unit' || flag === 'info' ? 'info' : 'error'}
