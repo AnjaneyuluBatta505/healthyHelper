@@ -22,7 +22,7 @@ const analysis = [
   {
     id: `$_${Math.random().toString(36).substr(2, 9)}`,
     value: 'Гормоны',
-    route: 'hormones',
+    route: 'HormonesForm',
   },
 ];
 
