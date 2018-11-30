@@ -8,7 +8,9 @@
     "dev": "react-devtools",
     "launch": "react-native run-android",
     "precommit": "lint-staged",
-    "lint": "./node_modules/.bin/eslint ./src/**/*.js"
+    "lint": "./node_modules/.bin/eslint ./src/**/*.js",
+    "log": "react-native log-android"
+    
   },
   "lint-staged": {
     "*.js": [
