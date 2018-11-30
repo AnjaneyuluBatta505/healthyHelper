@@ -1,4 +1,4 @@
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
 
 import Overview from './modules/overview';
 import Tests from './modules/Tests';
@@ -10,7 +10,7 @@ import ListOfDrugs from './modules/overview/Drugs/ListOfDrugs';
 import Drug from './modules/overview/Drugs/ListOfDrugs/Drug';
 
 const headerStyles = {
-  navigationOptions: {
+  defaultNavigationOptions: {
     headerStyle: {
       backgroundColor: '#6200ee',
     },
@@ -42,7 +42,7 @@ const TestsStack = createStackNavigator(
   headerStyles,
 );
 
-export default createBottomTabNavigator(
+export default createAppContainer(createBottomTabNavigator(
   {
     Home: {
       screen: HomeStack,
@@ -59,4 +59,4 @@ export default createBottomTabNavigator(
       },
     },
   },
-);
+));
