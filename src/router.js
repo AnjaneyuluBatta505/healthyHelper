@@ -52,7 +52,7 @@ export default createAppContainer(createBottomTabNavigator(
     },
   },
   {
-    initialRouteName: 'Tests',
+    initialRouteName: 'Home',
     tabBarOptions: {
       labelStyle: {
         fontSize: 18,

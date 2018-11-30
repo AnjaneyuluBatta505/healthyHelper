@@ -13,14 +13,8 @@ export const Container = styled.View`
   flexDirection: row;
   backgroundColor: #F5FCFF;
   justifyContent: flex-start;
-  marginTop: 5;
-  marginLeft: 5;
-  marginRight: 5;
-  marginBottom: 5;
-  paddingTop: 5;
-  paddingLeft: 5;
-  paddingRight: 5;
-  paddingBottom: 5;
+  margin: 5px;
+  padding: 5px;
 `;
 
 export const Item = styled.TouchableOpacity`
@@ -29,12 +23,6 @@ export const Item = styled.TouchableOpacity`
   borderRadius: 10;
   borderWidth: 2;
   borderColor: ${({ theme }) => theme.miTheme.primary};
-  marginTop: 5;
-  marginLeft: 5;
-  marginRight: 5;
-  marginBottom: 5;
-  paddingTop: 5;
-  paddingLeft: 5;
-  paddingRight: 5;
-  paddingBottom: 5;
+  margin: 5px;
+  padding: 5px;
 `;

@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const StyledText = styled.Text`
-  color: ${({ theme }) => theme.mono.dark};
+  color: ${({ theme }) => theme.miTheme.mono.dark};
   fontSize: 14;
 `;
 
@@ -10,7 +10,7 @@ export const StyledInput = styled.TextInput`
   height: 40;
   borderRadius: 10;
   borderWidth: 2;
-  borderColor: ${({ theme }) => theme.mono.dark};
+  borderColor: ${({ theme }) => theme.miTheme.mono.dark};
   paddingLeft: 15;
 `;
 
@@ -27,14 +27,8 @@ export const Container = styled.View`
   justifyContent: center;
   backgroundColor: rgb(245, 245, 245);
   height: 100%;
-  marginTop: 5;
-  marginLeft: 5;
-  marginRight: 5;
-  marginBottom: 5;
-  paddingTop: 5;
-  paddingLeft: 5;
-  paddingRight: 5;
-  paddingBottom: 5;
+  margin: 5px;
+  padding: 5px;
 `;
 
 export const StyledItemOfList = styled.TouchableOpacity`
@@ -44,7 +38,7 @@ export const StyledItemOfList = styled.TouchableOpacity`
   height: 50;
   width: 100%;
   borderWidth: 2;
-  borderColor: ${({ theme }) => theme.primary};
+  borderColor: ${({ theme }) => theme.miTheme.primary};
   justifyContent: center;
   backgroundColor: white;
   marginBottom: 5;

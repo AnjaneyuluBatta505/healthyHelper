@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
+import { Card, Title, Paragraph } from 'react-native-paper';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 
 import { actions } from '../../../../../redux/auth';
 import getDrugInfo from './selectors';
+
 
 import * as S from './styled';
 
@@ -33,79 +35,95 @@ class Drug extends Component {
       <S.Container>
         <ScrollView>
           <S.Wrapp>
-            <S.Header>Общая информация</S.Header>
-            <S.StyledText>Препарат - <S.BoldText>{info.name}</S.BoldText></S.StyledText>
-            {
-              !!info.deliveryForm && (
-                <S.StyledText>
-                  Форма выпуска -
-                  <S.BoldText>
-                    {` ${info.deliveryForm}`}
-                  </S.BoldText>
-                </S.StyledText>
-              )
-            }
-            <S.StyledText>
-              Производитель - <S.BoldText>{info.manufacturer}</S.BoldText>
-            </S.StyledText>
+            <Card.Content>
+              <Title>Общая информация</Title>
+              <Paragraph>Препарат - <S.BoldText>{info.name}</S.BoldText></Paragraph>
+            </Card.Content>
+            <Card.Content>
+              {
+                !!info.deliveryForm && (
+                  <S.StyledText>
+                    Форма выпуска -
+                    <S.BoldText>
+                      {` ${info.deliveryForm}`}
+                    </S.BoldText>
+                  </S.StyledText>
+                )
+              }
+            </Card.Content>
+            <Card.Content>
+              <Paragraph>Производитель - <S.BoldText>{info.manufacturer}</S.BoldText></Paragraph>
+            </Card.Content>
           </S.Wrapp>
           {
             !!composition && (
               <S.Wrapp>
-                <S.Header>Состав</S.Header>
-                <S.StyledText>
-                  {composition}
-                </S.StyledText>
+                <Card.Content>
+                  <Title>Состав</Title>
+                </Card.Content>
+                <Card.Content>
+                  <Paragraph>{composition}</Paragraph>
+                </Card.Content>
               </S.Wrapp>
             )
           }
           {
             !!indicationsForUse && (
               <S.Wrapp>
-                <S.Header>Показания к применению</S.Header>
-                <S.StyledText>
-                  {indicationsForUse}
-                </S.StyledText>
+                <Card.Content>
+                  <Title>Показания к применению</Title>
+                </Card.Content>
+                <Card.Content>
+                  <Paragraph>{indicationsForUse}</Paragraph>
+                </Card.Content>
               </S.Wrapp>
             )
           }
           {
             !!methodOfApplication && (
               <S.Wrapp>
-                <S.Header>Способ применеия</S.Header>
-                <S.StyledText>
-                  {methodOfApplication}
-                </S.StyledText>
+                <Card.Content>
+                  <Title>Способ применеия</Title>
+                </Card.Content>
+                <Card.Content>
+                  <Paragraph>{methodOfApplication}</Paragraph>
+                </Card.Content>
               </S.Wrapp>
             )
           }
           {
             !!sideEffect && (
               <S.Wrapp>
-                <S.Header>Побочные действия</S.Header>
-                <S.StyledText>
-                  {sideEffect}
-                </S.StyledText>
+                <Card.Content>
+                  <Title>Побочные действия</Title>
+                </Card.Content>
+                <Card.Content>
+                  <Paragraph>{sideEffect}</Paragraph>
+                </Card.Content>
               </S.Wrapp>
             )
           }
           {
             !!contraindications && (
               <S.Wrapp>
-                <S.Header>Противопоказания</S.Header>
-                <S.StyledText>
-                  {contraindications}
-                </S.StyledText>
+                <Card.Content>
+                  <Title>Противопоказания</Title>
+                </Card.Content>
+                <Card.Content>
+                  <Paragraph>{contraindications}</Paragraph>
+                </Card.Content>
               </S.Wrapp>
             )
           }
           {
             !!dosageAdministration && (
               <S.Wrapp>
-                <S.Header>Дозировка</S.Header>
-                <S.StyledText>
-                  {dosageAdministration}
-                </S.StyledText>
+                <Card.Content>
+                  <Title>Дозировка</Title>
+                </Card.Content>
+                <Card.Content>
+                  <Paragraph>{dosageAdministration}</Paragraph>
+                </Card.Content>
               </S.Wrapp>
             )
           }
