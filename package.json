@@ -43,7 +43,7 @@
     "redux-saga": "^0.16.2",
     "remote-redux-devtools": "^0.5.13",
     "reselect": "^4.0.0",
-    "styled-components": "^4.0.2"
+    "styled-components": "^4.1.2"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
