@@ -1,17 +1,18 @@
 import styled from 'styled-components/native';
+import { Card } from 'react-native-paper';
 
 export const StyledText = styled.Text`
-  color: ${({ theme }) => theme.mono.dark};
+  color: ${({ theme }) => theme.miTheme.mono.dark};
   fontSize: 16;
 `;
 
 export const BoldText = styled.Text`
-  color: ${({ theme }) => theme.mono.dark};
+  color: ${({ theme }) => theme.miTheme.mono.dark};
   fontSize: 18;
 `;
 
 export const Header = styled.Text`
-  color: ${({ theme }) => theme.mono.dark};
+  color: ${({ theme }) => theme.miTheme.mono.dark};
   fontSize: 18;
   fontWeight: bold;
 `;
@@ -21,38 +22,10 @@ export const Container = styled.View`
   justifyContent: flex-start;
   backgroundColor: rgb(245, 245, 245);
   height: 100%;
-  marginTop: 5;
-  marginLeft: 5;
-  marginRight: 5;
-  marginBottom: 5;
-  paddingTop: 10;
-  paddingLeft: 10;
-  paddingRight: 10;
-  paddingBottom: 10;
+  margin: 5px;
+  padding: 5px;
 `;
 
-export const Wrapp = styled.View`
-  backgroundColor: rgb(255, 255, 255);
-  marginBottom: 5;
-  paddingTop: 10;
-  paddingLeft: 10;
-  paddingRight: 10;
-  paddingBottom: 10;
-  borderRadius: 5;
+export const Wrapp = styled(Card)`
+  marginBottom: 5px;
 `;
-
-export const DrugName = styled.Text``;
-
-export const Manauf = styled.Text``;
-
-export const Web = styled.Text``;
-
-export const SideEff = styled.Text``;
-
-export const Dosage = styled.Text``;
-
-export const Contraindications = styled.Text``;
-
-export const Composition = styled.Text``;
-
-export const ForUse = styled.Text``;
