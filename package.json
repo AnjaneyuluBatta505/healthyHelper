@@ -16,6 +16,9 @@
       "eslint --fix"
     ]
   },
+  "rnpm": {
+    "assets": ["resources/fonts"]
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",

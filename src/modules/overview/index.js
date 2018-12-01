@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 // import { Text, TextInput, View, Button } from 'react-native';
 import { bindActionCreators, compose } from 'redux';
+// import CustomIcon from '../../components/CustomIcon.js'
+import { List, Checkbox } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import CustomIcon from '../../components/CustomIcon.js';
 
 // import axios from 'axios';
 import { actions } from '../../redux/auth';
@@ -16,6 +20,13 @@ class Overview extends Component {
   // name: '',
   // price: ''
   // }
+  state = {
+    expanded: true,
+  }
+
+  _handlePress = () => this.setState(({ expanded }) => ({
+    expanded: !expanded,
+  }));
 
   // componentDidMount() {
   //   axios.get('https://fathomless-island-87115.herokuapp.com/products')
@@ -65,35 +76,58 @@ class Overview extends Component {
   render() {
     const { overview } = this.props;
     // const { data, name, price } = this.state;
+
     return (
-      <S.Container>
-        {/* <TextInput
-          style={{height: 40, border: 3, borderColor: 'black', width: 120}}
-          value={name}
-          placeholder="Name"
-          onChangeText={text => this.setState({ name: text })}
-        />
-        <TextInput
-          style={{height: 40, border: 3, borderColor: 'black', width: 120}}
-          value={price}
-          placeholder="Price"
-          onChangeText={text => this.setState({ price: text })}
-        />
-        <Button
-          onPress={this.handleClickOnBtn}
-          title="Post data"
-      /> */}
-        {
-          overview.data.map((el, i) => (
-            <S.Item key={el.id} onPress={() => this.handleClick(i)}>
-              <S.StyledText>
-                {el.name}
-              </S.StyledText>
-            </S.Item>
-          ))
-        }
-      </S.Container>
+      <List.Section title="Accordions">
+        <List.Accordion
+          title="Uncontrolled Accordion"
+          left={props => <List.Icon {...props} icon="folder" />}
+        >
+          <List.Item title="First item" />
+          <List.Item title="Second item" />
+        </List.Accordion>
+
+        <List.Accordion
+          title="Controlled Accordion"
+          left={props => <CustomIcon {...props} name="medicine" size={50} /> }
+          expanded={this.state.expanded}
+          onPress={this._handlePress}
+        >
+          <List.Item title="First item" />
+          <List.Item title="Second item" />
+        </List.Accordion>
+      </List.Section>
     );
+    // return (
+    //   <S.Container>
+    //     <CustomIcon name='android' size={25} /> 
+    //     {/* <TextInput
+    //       style={{height: 40, border: 3, borderColor: 'black', width: 120}}
+    //       value={name}
+    //       placeholder="Name"
+    //       onChangeText={text => this.setState({ name: text })}
+    //     />
+    //     <TextInput
+    //       style={{height: 40, border: 3, borderColor: 'black', width: 120}}
+    //       value={price}
+    //       placeholder="Price"
+    //       onChangeText={text => this.setState({ price: text })}
+    //     />
+    //     <Button
+    //       onPress={this.handleClickOnBtn}
+    //       title="Post data"
+    //   /> */}
+    //     {/* {
+    //       overview.data.map((el, i) => (
+    //         <S.Item key={el.id} onPress={() => this.handleClick(i)}>
+    //           <S.StyledText>
+    //             {el.name}
+    //           </S.StyledText>
+    //         </S.Item>
+    //       ))
+    //     } */}
+    //   </S.Container>
+    // );
   }
 }
 
