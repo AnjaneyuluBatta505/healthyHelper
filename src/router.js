@@ -56,6 +56,8 @@ export default createAppContainer(createBottomTabNavigator(
     tabBarOptions: {
       labelStyle: {
         fontSize: 18,
+        textAlignVertical: 'center',
+        height: '100%',
       },
     },
   },

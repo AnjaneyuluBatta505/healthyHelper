@@ -55,6 +55,8 @@
 		B2592B89F8424DF1B35163B3 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9DEE0F2C415744CE8543C6E7 /* SimpleLineIcons.ttf */; };
 		1DA71F2DD8B742A48C44FCDF /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5948328C0F44BC094FBA499 /* Zocial.ttf */; };
 		ECBFABE387244D6BB5AD3177 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BFC5B08758A4AD296CFB210 /* libRNGestureHandler.a */; };
+		25B8CAFB5A63448988033C16 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2921A93528CB4D368C910951 /* icomoon.ttf */; };
+		9F88824D15C34C89A2E9E9E8 /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86CE0CBFE3B845CC8E890D26 /* fontello.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -380,6 +382,8 @@
 		F5948328C0F44BC094FBA499 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		FCE8E0D442B14E889761F235 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; name = "RNGestureHandler.xcodeproj"; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		7BFC5B08758A4AD296CFB210 /* libRNGestureHandler.a */ = {isa = PBXFileReference; name = "libRNGestureHandler.a"; path = "libRNGestureHandler.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		2921A93528CB4D368C910951 /* icomoon.ttf */ = {isa = PBXFileReference; name = "icomoon.ttf"; path = "../resources/fonts/icomoon.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		86CE0CBFE3B845CC8E890D26 /* fontello.ttf */ = {isa = PBXFileReference; name = "fontello.ttf"; path = "../resources/fonts/fontello.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -664,6 +668,8 @@
 				CCA68423E6EE4C1CADF47261 /* Octicons.ttf */,
 				9DEE0F2C415744CE8543C6E7 /* SimpleLineIcons.ttf */,
 				F5948328C0F44BC094FBA499 /* Zocial.ttf */,
+				2921A93528CB4D368C910951 /* icomoon.ttf */,
+				86CE0CBFE3B845CC8E890D26 /* fontello.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1130,6 +1136,8 @@
 				E58FBE79704A402484EF190E /* Octicons.ttf in Resources */,
 				B2592B89F8424DF1B35163B3 /* SimpleLineIcons.ttf in Resources */,
 				1DA71F2DD8B742A48C44FCDF /* Zocial.ttf in Resources */,
+				25B8CAFB5A63448988033C16 /* icomoon.ttf in Resources */,
+				9F88824D15C34C89A2E9E9E8 /* fontello.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

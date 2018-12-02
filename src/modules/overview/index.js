@@ -1,49 +1,35 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { Text, TextInput, View, Button } from 'react-native';
 import { bindActionCreators, compose } from 'redux';
+import { List } from 'react-native-paper';
 
-// import axios from 'axios';
 import { actions } from '../../redux/auth';
+
 import * as S from './styled';
 
 class Overview extends Component {
-  static navigationOptions = () => ({ title: 'Overview' });
+  static navigationOptions = () => ({ title: 'Меню' });
 
-  // state = {
-  //   data: [],
-  // name: '',
-  // price: ''
-  // }
+  state = {
+    expanded: true,
+  }
 
-  // componentDidMount() {
-  //   axios.get('https://fathomless-island-87115.herokuapp.com/products')
-  //     .then(response => response.data)
-  //     .then(responseJson => this.setState({ data: responseJson }))
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }
+  handlePress = () => this.setState(({ expanded }) => ({
+    expanded: !expanded,
+  }));
 
-  // request = () => axios.get('https://fathomless-island-87115.herokuapp.com/products')
-  //   .then(response => response.data)
-  //   .then(responseJson => this.setState({ data: responseJson }))
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
-
-  handleClick = (i) => {
+  handleClick = i => () => {
     const { navigation } = this.props;
     switch (i) {
       case 0:
         navigation.navigate('Drugs', {
-          headerTitle: 'Overview',
+          headerTitle: 'Меню',
         });
         break;
       case 4:
         navigation.navigate('TestsForm', {
-          headerTitle: 'Overview',
+          headerTitle: 'Меню',
         });
         break;
       default:
@@ -52,61 +38,44 @@ class Overview extends Component {
     return null;
   }
 
-  // handleClickOnBtn = () => {
-  //   const { name, price } = this.state;
-  //   axios.post('https://fathomless-island-87115.herokuapp.com/products/create', { name, price })
-  //     .then(this.request)
-  //     // .then(responseJson => this.setState({ data: responseJson }))
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }
-
   render() {
     const { overview } = this.props;
-    // const { data, name, price } = this.state;
+    const { expanded } = this.state;
+
     return (
-      <S.Container>
-        {/* <TextInput
-          style={{height: 40, border: 3, borderColor: 'black', width: 120}}
-          value={name}
-          placeholder="Name"
-          onChangeText={text => this.setState({ name: text })}
-        />
-        <TextInput
-          style={{height: 40, border: 3, borderColor: 'black', width: 120}}
-          value={price}
-          placeholder="Price"
-          onChangeText={text => this.setState({ price: text })}
-        />
-        <Button
-          onPress={this.handleClickOnBtn}
-          title="Post data"
-      /> */}
-        {
-          overview.data.map((el, i) => (
-            <S.Item key={el.id} onPress={() => this.handleClick(i)}>
-              <S.StyledText>
-                {el.name}
-              </S.StyledText>
-            </S.Item>
-          ))
-        }
-      </S.Container>
+      <List.Section>
+        <List.Accordion
+          title="Healthy Helper features"
+          left={props => <S.TitleIcon {...props} name="cardiogram" size={40} />}
+          expanded={expanded}
+          onPress={this.handlePress}
+        >
+          <S.Separator />
+          {
+            overview.data.map((elem, indx) => (
+              <Fragment key={elem.id}>
+                <S.ListItem
+                  title={elem.name}
+                  onPress={this.handleClick(indx)}
+                  left={props => <S.ItemIcon {...props} name={elem.iconName} size={35} />}
+                />
+                <S.Separator />
+              </Fragment>
+            ))
+          }
+        </List.Accordion>
+      </List.Section>
     );
   }
 }
-
-Overview.defaultProps = {
-};
 
 Overview.propTypes = {
   overview: PropTypes.shape({}).isRequired,
   navigation: PropTypes.shape({}).isRequired,
 };
 
-const mapStateToProps = state => ({
-  overview: state.overview,
+const mapStateToProps = ({ overview }) => ({
+  overview,
 });
 
 const mapDispatchToProps = dispatch => ({
