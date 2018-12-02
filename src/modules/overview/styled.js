@@ -1,28 +1,35 @@
 import styled from 'styled-components/native';
+import { List } from 'react-native-paper';
 
-export const StyledText = styled.Text`
-  color: ${({ theme }) => theme.miTheme.mono.dark};
-  fontSize: 14;
-  textAlign: center;
+import CustomIcon from '../../components/CustomIcon.js';
+
+export const TitleIcon = styled(CustomIcon)`
+  display: flex;
+  alignItems: center;
+  justifyContent: center;
+  height: 40px;
+  width: 40px;
+  marginRight: 20px;
+  marginLeft: 10px;
 `;
 
-export const Container = styled.View`
-  flex: 1;
-  flexWrap: wrap;
-  height: 100;
-  flexDirection: row;
-  backgroundColor: #F5FCFF;
-  justifyContent: flex-start;
-  margin: 5px;
-  padding: 5px;
+export const ItemIcon = styled(CustomIcon)`
+  display: flex;
+  alignItems: center;
+  justifyContent: center;
+  marginRight: 20px;
+  marginLeft: 10px;
+  height: 35px;
+  width: 35px;
 `;
 
-export const Item = styled.TouchableOpacity`
-  height: 25%;
-  width: 30.3%;
-  borderRadius: 10;
-  borderWidth: 2;
-  borderColor: ${({ theme }) => theme.miTheme.primary};
-  margin: 5px;
-  padding: 5px;
+export const Separator = styled.View`
+  borderBottomColor: #bbb;
+  borderBottomWidth: 1px;
+`;
+
+export const ListItem = styled(List.Item)`
+  display: flex;
+  alignItems: center;
+  justifyContent: center;
 `;
