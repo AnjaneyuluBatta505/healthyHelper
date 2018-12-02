@@ -1,46 +1,29 @@
 import styled from 'styled-components/native';
+import { List } from 'react-native-paper';
 
-export const StyledText = styled.Text`
-  color: ${({ theme }) => theme.miTheme.mono.dark};
-  fontSize: 14;
-`;
+import CustomIcon from '../../../../components/CustomIcon.js';
 
-export const StyledInput = styled.TextInput`
-  width: 200;
-  height: 40;
-  borderRadius: 10;
-  borderWidth: 2;
-  borderColor: ${({ theme }) => theme.miTheme.mono.dark};
-  paddingLeft: 15;
-`;
-
-export const InputContainer = styled.View`
+export const TitleIcon = styled(CustomIcon)`
   display: flex;
-  flexDirection: row;
+  alignItems: center;
   justifyContent: center;
-  marginBottom: 15;
+  height: 40px;
+  width: 40px;
+  marginRight: 20px;
+  marginLeft: 10px;
+`;
+
+export const Separator = styled.View`
+  borderBottomColor: #bbb;
+  borderBottomWidth: 1px;
+`;
+
+export const ListItem = styled(List.Item)`
+  display: flex;
+  alignItems: center;
+  justifyContent: center;
 `;
 
 export const Container = styled.View`
-  display: flex;
-  alignItems: center;
-  justifyContent: center;
-  backgroundColor: rgb(245, 245, 245);
-  height: 100%;
-  margin: 5px;
-  padding: 5px;
-`;
-
-export const StyledItemOfList = styled.TouchableOpacity`
-  display: flex;
-  flexDirection: row;
-  alignItems: center;
-  height: 50;
-  width: 100%;
-  borderWidth: 2;
-  borderColor: ${({ theme }) => theme.miTheme.primary};
-  justifyContent: center;
-  backgroundColor: white;
-  marginBottom: 5;
-  borderRadius: 15;
+  marginTop: 5px;
 `;

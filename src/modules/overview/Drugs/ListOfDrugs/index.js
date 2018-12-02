@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { List, Searchbar } from 'react-native-paper';
+import { ScrollView } from 'react-native';
 
 import { actions } from '../../../../redux/auth';
 import getListOfDrugs from './selectors';
@@ -23,7 +24,8 @@ class ListOfDrugs extends Component {
     searchString: '',
   }
 
-  handleClick = (id) => {
+
+  handleClick = id => () => {
     const { navigation } = this.props;
     const groupId = navigation.getParam('id');
     navigation.navigate('Drug', {
@@ -40,23 +42,29 @@ class ListOfDrugs extends Component {
     const info = drugs.saleNaming;
 
     return (
-      <S.Container>
-        <S.InputContainer>
-          <S.StyledInput
-            placeholder="Search text"
+      <List.Section>
+        <ScrollView>
+          <Searchbar
+            placeholder="Search"
+            onChangeText={query => this.setState({ searchString: query })}
             value={searchString}
-            onChangeText={text => this.setState({ searchString: text })}
           />
-        </S.InputContainer>
-        <FlatList
-          data={info}
-          renderItem={({ item }) => (
-            <S.StyledItemOfList key={item.id} onPress={() => this.handleClick(item.id)}>
-              <S.StyledText key={item.id}>{item.name}</S.StyledText>
-            </S.StyledItemOfList>
-          )}
-        />
-      </S.Container>
+          <S.Container>
+            <S.Separator />
+            {
+              info.map(elem => (
+                <Fragment key={elem.id}>
+                  <S.ListItem
+                    title={elem.name}
+                    onPress={this.handleClick(elem.id)}
+                  />
+                  <S.Separator />
+                </Fragment>
+              ))
+            }
+          </S.Container>
+        </ScrollView>
+      </List.Section>
     );
   }
 }
