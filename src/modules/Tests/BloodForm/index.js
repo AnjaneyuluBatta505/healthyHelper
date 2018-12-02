@@ -192,7 +192,7 @@ class BloodForm extends Component {
       }
 
       if (value > limits[sex].maxLimit) {
-        return this.showInfo(i, { flag: 'info', info: 'Превшена норма' });
+        return this.showInfo(i, { flag: 'info', info: 'Превышена норма' });
       }
 
       if (value < limits[sex].minLimit) {

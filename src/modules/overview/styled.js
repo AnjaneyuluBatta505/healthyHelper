@@ -1,35 +1,21 @@
-import styled from 'styled-components/native';
-import { List } from 'react-native-paper';
+import styled from 'styled-components';
+import { Card } from 'react-native-paper';
 
-import CustomIcon from '../../components/CustomIcon.js';
-
-export const TitleIcon = styled(CustomIcon)`
-  display: flex;
-  alignItems: center;
-  justifyContent: center;
-  height: 40px;
-  width: 40px;
-  marginRight: 20px;
-  marginLeft: 10px;
+export const Container = styled(Card)`
+  marginBottom: 15px;
 `;
 
-export const ItemIcon = styled(CustomIcon)`
+export const Header = styled.View`
   display: flex;
+  flexDirection: row;
   alignItems: center;
   justifyContent: center;
-  marginRight: 20px;
-  marginLeft: 10px;
-  height: 35px;
-  width: 35px;
+  padding: 20px;
+  width: 100%;
 `;
 
-export const Separator = styled.View`
-  borderBottomColor: #bbb;
-  borderBottomWidth: 1px;
-`;
-
-export const ListItem = styled(List.Item)`
+export const Wrapper = styled.View`
   display: flex;
-  alignItems: center;
-  justifyContent: center;
+  height: 100%;
+  justifyContent: space-around;
 `;

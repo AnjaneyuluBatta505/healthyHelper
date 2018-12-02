@@ -5,9 +5,7 @@ import { Card, Title, Paragraph } from 'react-native-paper';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 
-import { actions } from '../../../../../redux/auth';
 import getDrugInfo from './selectors';
-
 
 import * as S from './styled';
 
@@ -31,6 +29,7 @@ class Drug extends Component {
       dosageAdministration,
       composition,
     } = info.instruction;
+
     return (
       <S.Container>
         <ScrollView>
@@ -142,9 +141,7 @@ const mapStateToProps = ({ drugs }, { navigation }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({
-    ...actions,
-  }, dispatch),
+  actions: bindActionCreators({}, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Drug);

@@ -17,6 +17,7 @@ export const ItemIcon = styled(CustomIcon)`
   display: flex;
   alignItems: center;
   justifyContent: center;
+  marginTop: 5px;
   marginRight: 20px;
   marginLeft: 10px;
   height: 35px;

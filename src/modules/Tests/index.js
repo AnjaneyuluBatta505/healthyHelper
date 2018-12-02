@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { List } from 'react-native-paper';
+import { List, IconButton } from 'react-native-paper';
 
 import * as S from './styled';
 
@@ -71,8 +71,15 @@ class Tests extends Component {
               <Fragment key={elem.id}>
                 <S.ListItem
                   title={elem.value}
-                  onPress={this.handleClick(elem.id)}
                   left={props => <S.ItemIcon {...props} name={elem.iconName} size={35} />}
+                  onPress={this.handleClick(elem.id)}
+                  right={() => (
+                    <IconButton
+                      icon="arrow-forward"
+                      size={20}
+                      onPress={this.handleClick(elem.id)}
+                    />
+                  )}
                 />
                 <S.Separator />
               </Fragment>
