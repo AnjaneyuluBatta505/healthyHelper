@@ -2,10 +2,10 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { List, Searchbar } from 'react-native-paper';
+import { List, Searchbar, IconButton } from 'react-native-paper';
 import { ScrollView } from 'react-native';
 
-import { actions } from '../../../../redux/auth';
+import { Separator, ListItem } from '../../../../helpers/layout/List';
 import getListOfDrugs from './selectors';
 
 import * as S from './styled';
@@ -50,15 +50,22 @@ class ListOfDrugs extends Component {
             value={searchString}
           />
           <S.Container>
-            <S.Separator />
+            <Separator />
             {
               info.map(elem => (
                 <Fragment key={elem.id}>
-                  <S.ListItem
+                  <ListItem
                     title={elem.name}
                     onPress={this.handleClick(elem.id)}
+                    right={() => (
+                      <IconButton
+                        icon="arrow-forward"
+                        size={20}
+                        onPress={this.handleClick(elem.id)}
+                      />
+                    )}
                   />
-                  <S.Separator />
+                  <Separator />
                 </Fragment>
               ))
             }
@@ -77,9 +84,7 @@ const mapStateToProps = ({ drugs }, { navigation }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({
-    ...actions,
-  }, dispatch),
+  actions: bindActionCreators({}, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListOfDrugs);

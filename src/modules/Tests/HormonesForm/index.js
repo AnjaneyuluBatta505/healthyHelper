@@ -155,7 +155,7 @@ class HormonesForm extends Component {
       }
 
       if (value > limits[sex].maxLimit) {
-        return this.showInfo(i, { flag: 'info', info: 'Превшена норма' });
+        return this.showInfo(i, { flag: 'info', info: 'Превышена норма' });
       }
 
       if (value < limits[sex].minLimit) {
@@ -212,14 +212,14 @@ class HormonesForm extends Component {
             value={sex}
           >
             <View>
-              <Text>Муж-ой</Text>
+              <Text>М</Text>
               <S.RadioBtn
                 color="#6200ee"
                 value="man"
               />
             </View>
             <View>
-              <Text>Жен-ий</Text>
+              <Text>Ж</Text>
               <S.RadioBtn
                 color="#6200ee"
                 value="woman"
