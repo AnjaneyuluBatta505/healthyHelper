@@ -1,9 +1,15 @@
 import styled from 'styled-components/native';
 import { Card } from 'react-native-paper';
 
-export const StyledText = styled.Text`
-  color: ${({ theme }) => theme.miTheme.mono.dark};
+export const Btn = styled.Text`
+  textDecorationLine: underline;
   fontSize: 16;
+  color: blue;
+`;
+
+export const StyledText = styled.Text`
+  fontSize: 16;
+  color: gray;
 `;
 
 export const BoldText = styled.Text`
