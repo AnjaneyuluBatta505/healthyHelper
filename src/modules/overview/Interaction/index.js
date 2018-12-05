@@ -11,6 +11,8 @@ import getData from './selectors';
 import * as S from './styled';
 
 class Interaction extends Component {
+  static navigationOptions = () => ({ headerTitle: 'Проверка взаимодействия' });
+
   static propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   }
@@ -38,16 +40,16 @@ class Interaction extends Component {
 
     return (
       <Fragment>
-        <ScrollView>
-          <S.Container>
-            <Paragraph>Введите как минимум 2 символа для поиска</Paragraph>
-          </S.Container>
-          <Searchbar
-            placeholder="Ибупро..."
-            onChangeText={query => this.handleInput(query)}
-            value={outputSting}
-          />
-          <List.Section>
+        <S.Container>
+          <Paragraph>Введите как минимум 2 символа для поиска</Paragraph>
+        </S.Container>
+        <Searchbar
+          placeholder="Азими..."
+          onChangeText={query => this.handleInput(query)}
+          value={outputSting}
+        />
+        <List.Section>
+          <ScrollView>
             <Separator />
             {
               data.map(({ id, name, expanded, interactions }, index) => {
@@ -76,8 +78,8 @@ class Interaction extends Component {
                 return null;
               })
           }
-          </List.Section>
-        </ScrollView>
+          </ScrollView>
+        </List.Section>
       </Fragment>
     );
   }

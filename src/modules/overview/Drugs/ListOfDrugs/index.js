@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { List, Searchbar, IconButton } from 'react-native-paper';
+import { List, IconButton } from 'react-native-paper';
 import { ScrollView } from 'react-native';
 
 import { Separator, ListItem } from '../../../../helpers/layout/List';
@@ -20,11 +20,6 @@ class ListOfDrugs extends Component {
     title: `${navigation.getParam('headerTitle', '')}`,
   })
 
-  state = {
-    searchString: '',
-  }
-
-
   handleClick = id => () => {
     const { navigation } = this.props;
     const groupId = navigation.getParam('id');
@@ -37,18 +32,12 @@ class ListOfDrugs extends Component {
 
   render() {
     const { drugs } = this.props;
-    const { searchString } = this.state;
 
     const info = drugs.saleNaming;
 
     return (
       <List.Section>
         <ScrollView>
-          <Searchbar
-            placeholder="Search"
-            onChangeText={query => this.setState({ searchString: query })}
-            value={searchString}
-          />
           <S.Container>
             <Separator />
             {
