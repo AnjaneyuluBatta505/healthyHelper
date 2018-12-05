@@ -5,24 +5,24 @@ import { List, IconButton } from 'react-native-paper';
 import * as S from './styled';
 
 const analysis = [
-  {
-    id: `$_${Math.random().toString(36).substr(2, 9)}`,
-    value: 'Анализ мочи',
-    route: 'wee',
-    iconName: 'urine',
-  },
+  // {
+  //   id: `$_${Math.random().toString(36).substr(2, 9)}`,
+  //   value: 'Анализ мочи',
+  //   route: 'wee',
+  //   iconName: 'urine',
+  // },
   {
     id: `$_${Math.random().toString(36).substr(2, 9)}`,
     value: 'Анализ крови',
     route: 'BloodForm',
     iconName: 'testtube',
   },
-  {
-    id: `$_${Math.random().toString(36).substr(2, 9)}`,
-    value: 'Витамины',
-    route: 'vitamins',
-    iconName: 'vitamins',
-  },
+  // {
+  //   id: `$_${Math.random().toString(36).substr(2, 9)}`,
+  //   value: 'Витамины',
+  //   route: 'vitamins',
+  //   iconName: 'vitamins',
+  // },
   {
     id: `$_${Math.random().toString(36).substr(2, 9)}`,
     value: 'Гормоны',

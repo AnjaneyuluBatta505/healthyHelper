@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Linking, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, Title, Paragraph } from 'react-native-paper';
 import PropTypes from 'prop-types';
@@ -19,6 +19,18 @@ class Drug extends Component {
     title: 'Информация об лекарстве',
   })
 
+  handleClick = () => {
+    const { info } = this.props;
+
+    Linking.canOpenURL(info.web).then((supported) => {
+      if (supported) {
+        Linking.openURL(info.web);
+      } else {
+        console.log(`Don't know how to open URI: ${info.web}`);
+      }
+    });
+  };
+
   render() {
     const { info } = this.props;
     const {
@@ -28,6 +40,7 @@ class Drug extends Component {
       contraindications,
       dosageAdministration,
       composition,
+      interactions,
     } = info.instruction;
 
     return (
@@ -36,7 +49,7 @@ class Drug extends Component {
           <S.Wrapp>
             <Card.Content>
               <Title>Общая информация</Title>
-              <Paragraph>Препарат - <S.BoldText>{info.name}</S.BoldText></Paragraph>
+              <S.StyledText>Препарат - <S.BoldText>{info.name}</S.BoldText></S.StyledText>
             </Card.Content>
             <Card.Content>
               {
@@ -51,7 +64,35 @@ class Drug extends Component {
               }
             </Card.Content>
             <Card.Content>
-              <Paragraph>Производитель - <S.BoldText>{info.manufacturer}</S.BoldText></Paragraph>
+              {
+                !!info.deliveryForm && (
+                  <TouchableOpacity onPress={this.handleClick}>
+                    <S.Btn>
+                    Доп. инфо
+                    </S.Btn>
+                  </TouchableOpacity>
+                )
+              }
+            </Card.Content>
+            <Card.Content>
+              <S.StyledText>
+                Производитель -
+                <S.BoldText>
+                  {info.manufacturer}
+                </S.BoldText>
+              </S.StyledText>
+            </Card.Content>
+            <Card.Content>
+              {
+                !!info.PH && (
+                  <S.StyledText>
+                    Фармакотерапевтическая группа (ФТГ):
+                    <S.BoldText>
+                      {` ${info.PH}`}
+                    </S.BoldText>
+                  </S.StyledText>
+                )
+              }
             </Card.Content>
           </S.Wrapp>
           {
@@ -122,6 +163,18 @@ class Drug extends Component {
                 </Card.Content>
                 <Card.Content>
                   <Paragraph>{dosageAdministration}</Paragraph>
+                </Card.Content>
+              </S.Wrapp>
+            )
+          }
+          {
+            !!interactions && (
+              <S.Wrapp>
+                <Card.Content>
+                  <Title>Взаимодействие с другими лекарственными средствами</Title>
+                </Card.Content>
+                <Card.Content>
+                  <Paragraph>{interactions}</Paragraph>
                 </Card.Content>
               </S.Wrapp>
             )
