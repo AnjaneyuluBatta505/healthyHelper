@@ -9,6 +9,7 @@ import Drugs from './modules/overview/Drugs';
 import AltMedicine from './modules/overview/AltMedicine';
 import ListOfDrugs from './modules/overview/Drugs/ListOfDrugs';
 import Drug from './modules/overview/Drugs/ListOfDrugs/Drug';
+import Interaction from './modules/overview/Interaction';
 
 const headerStyles = {
   defaultNavigationOptions: {
@@ -34,6 +35,7 @@ const HomeStack = createStackNavigator(
     WeeForm,
     BloodForm,
     HormonesForm,
+    Interaction,
   },
   headerStyles,
 );

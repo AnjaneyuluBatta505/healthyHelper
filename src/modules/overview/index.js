@@ -28,6 +28,11 @@ class Overview extends Component {
           headerTitle: 'Меню',
         });
         break;
+      case 1:
+        navigation.navigate('Interaction', {
+          headerTitle: 'Меню',
+        });
+        break;
       case 2:
         navigation.navigate('Tests', {
           headerTitle: 'Меню',

@@ -26,7 +26,7 @@ class Drug extends Component {
       if (supported) {
         Linking.openURL(info.web);
       } else {
-        console.log("Don't know how to open URI: " + info.web);
+        console.log(`Don't know how to open URI: ${info.web}`);
       }
     });
   };
