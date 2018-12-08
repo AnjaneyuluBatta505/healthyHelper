@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { bindActionCreators, compose } from 'redux';
 import { Title, IconButton } from 'react-native-paper';
 
+import { actions as overviewActions } from '../../redux/overview';
 import { TitleIcon, ItemIcon, Separator, ListItem } from '../../helpers/layout/List';
+import Loader from '../../components/Loader';
 
 import * as S from './styled';
 
@@ -20,31 +22,31 @@ const HeaderTitle = () => (
 class Overview extends Component {
   static navigationOptions = () => ({ headerTitle: HeaderTitle() });
 
+  componentDidMount() {
+    const { actions } = this.props;
+    actions.getOverviewDataRequest();
+  }
+
   handleClick = i => () => {
     const { navigation } = this.props;
     switch (i) {
-      case 0:
+      case 3:
         navigation.navigate('Drugs', {
           headerTitle: 'Меню',
         });
         break;
-      case 1:
+      case 0:
         navigation.navigate('Interaction', {
           headerTitle: 'Меню',
         });
         break;
-      case 2:
+      case 1:
         navigation.navigate('Tests', {
           headerTitle: 'Меню',
         });
         break;
-      case 3:
+      case 2:
         navigation.navigate('AltMedicine', {
-          headerTitle: 'Меню',
-        });
-        break;
-      case 4:
-        navigation.navigate('TestsForm', {
           headerTitle: 'Меню',
         });
         break;
@@ -55,13 +57,17 @@ class Overview extends Component {
   }
 
   render() {
-    const { overview } = this.props;
+    const { data, isLoading } = this.props;
+
+    if (isLoading) {
+      return <Loader />;
+    }
 
     return (
       <S.Wrapper>
         {
-          overview.data.map((elem, indx) => (
-            <Fragment key={elem.id}>
+          data.map((elem, indx) => (
+            <Fragment key={elem._id}>
               <S.Container>
                 <ListItem
                   title={elem.name}
@@ -86,16 +92,18 @@ class Overview extends Component {
 }
 
 Overview.propTypes = {
-  overview: PropTypes.shape({}).isRequired,
   navigation: PropTypes.shape({}).isRequired,
 };
 
 const mapStateToProps = ({ overview }) => ({
-  overview,
+  data: overview.data,
+  isLoading: overview.isLoading,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({}, dispatch),
+  actions: bindActionCreators({
+    ...overviewActions,
+  }, dispatch),
 });
 
 export default compose(

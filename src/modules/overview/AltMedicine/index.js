@@ -8,6 +8,7 @@ import { Card, List, Paragraph } from 'react-native-paper';
 
 import { Separator } from '../../../helpers/layout/List';
 
+/* eslint-disable */
 const altMedicineData = [
   {
     id: `$_${Math.random().toString(36).substr(2, 9)}`,
@@ -79,6 +80,7 @@ const altMedicineData = [
     expanded: false,
   },
 ];
+/* eslint-enable */
 
 class AltMedicine extends Component {
   static propTypes = {

@@ -17,7 +17,9 @@
     ]
   },
   "rnpm": {
-    "assets": ["resources/fonts"]
+    "assets": [
+      "resources/fonts"
+    ]
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -42,9 +44,7 @@
     "react-redux": "^5.0.7",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.3",
-    "redux-devtools-extension": "^2.13.5",
     "redux-saga": "^0.16.2",
-    "remote-redux-devtools": "^0.5.13",
     "reselect": "^4.0.0",
     "styled-components": "^4.1.2"
   },

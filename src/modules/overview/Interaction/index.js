@@ -52,11 +52,11 @@ class Interaction extends Component {
           <ScrollView>
             <Separator />
             {
-              data.map(({ id, name, expanded, interactions }, index) => {
+              data.map(({ _id, name, expanded, interactions }, index) => {
                 if (searchString.length >= 2 && name.indexOf(searchString) >= 0) {
                   return (
                     <List.Accordion
-                      key={id}
+                      key={_id}
                       title={name}
                       expanded={expanded}
                       onPress={this.handlePress(index)}

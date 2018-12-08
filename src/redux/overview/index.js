@@ -1,6 +1,6 @@
 import { handleActions, createActions } from 'redux-actions';
 
-import initialState from './handlers';
+import initialState, * as handlers from './handlers';
 
 export const actions = createActions({
   GET_OVERVIEW_DATA_REQUEST: undefined,
@@ -10,6 +10,9 @@ export const actions = createActions({
 
 const reducer = handleActions(
   new Map([
+    [actions.getOverviewDataRequest, handlers.getOverviewDataRequest],
+    [actions.getOverviewDataSuccess, handlers.getOverviewDataSuccess],
+    [actions.getOverviewDataFailure, handlers.getOverviewDataFailure],
   ]),
   initialState,
 );

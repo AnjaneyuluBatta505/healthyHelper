@@ -42,15 +42,15 @@ class ListOfDrugs extends Component {
             <Separator />
             {
               info.map(elem => (
-                <Fragment key={elem.id}>
+                <Fragment key={elem._id}>
                   <ListItem
                     title={elem.name}
-                    onPress={this.handleClick(elem.id)}
+                    onPress={this.handleClick(elem._id)}
                     right={() => (
                       <IconButton
                         icon="arrow-forward"
                         size={20}
-                        onPress={this.handleClick(elem.id)}
+                        onPress={this.handleClick(elem._id)}
                       />
                     )}
                   />

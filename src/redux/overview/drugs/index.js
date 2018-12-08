@@ -1,6 +1,6 @@
 import { handleActions, createActions } from 'redux-actions';
 
-import initialState from './handlers';
+import initialState, * as handlers from './handlers';
 
 export const actions = createActions({
   GET_DRUGS_DATA_REQUEST: undefined,
@@ -10,6 +10,7 @@ export const actions = createActions({
 
 const reducer = handleActions(
   new Map([
+    [actions.getDrugsDataRequest, handlers.getDrugsDataRequest],
   ]),
   initialState,
 );

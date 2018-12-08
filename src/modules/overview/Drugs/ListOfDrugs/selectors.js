@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const getInfo = ({ drugs, id }) => drugs.data.filter(el => el.id === id)[0];
+const getInfo = ({ drugs, id }) => drugs.data.filter(el => el._id === id)[0];
 
 const getListOfDrugs = createSelector(
   [getInfo],

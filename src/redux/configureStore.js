@@ -1,8 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import { createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
-// import devToolsEnhancer from 'remote-redux-devtools';
 
 import rootSaga from './sagas';
 import rootReducer from './reducers';
@@ -20,7 +18,7 @@ const createStoreWithMiddleware = applyMiddleware(
 )(createStore);
 
 export default function configureStore(initialState) {
-  const store = createStoreWithMiddleware(rootReducer, initialState, composeWithDevTools());
+  const store = createStoreWithMiddleware(rootReducer, initialState);
   sagaMiddleware.run(rootSaga);
   return store;
 }
