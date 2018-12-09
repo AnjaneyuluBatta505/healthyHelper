@@ -6,34 +6,49 @@ import { ScrollView } from 'react-native';
 import { IconButton } from 'react-native-paper';
 
 import { Separator, ListItem } from '../../../helpers/layout/List';
+import { actions as drugsGroupActions } from '../../../redux/overview/drugs';
+import Loader from '../../../components/Loader';
 
 class Drugs extends Component {
   static propTypes = {
     navigation: PropTypes.shape({}).isRequired,
-    drugs: PropTypes.shape({}).isRequired,
+    drugsGroup: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    actions: PropTypes.shape({
+      getDrugsGroupDataRequest: PropTypes.func,
+    }).isRequired,
   }
 
   static navigationOptions = {
     title: 'Лечебные средства',
   }
 
+  componentDidMount() {
+    const { actions } = this.props;
+    actions.getDrugsGroupDataRequest();
+  }
+
   handleClick = (id, i) => () => {
-    const { navigation, drugs } = this.props;
+    const { navigation, drugsGroup } = this.props;
     navigation.navigate('ListOfDrugs', {
-      headerTitle: `${drugs.data[i].name}`,
+      headerTitle: `${drugsGroup[i].name}`,
       id,
     });
   }
 
   render() {
-    const { drugs } = this.props;
+    const { drugsGroup, isLoading } = this.props;
+
+    if (isLoading) {
+      return <Loader />;
+    }
 
     return (
       <ScrollView>
         <Fragment>
           <Separator />
           {
-            drugs.data.map((elem, indx) => (
+            drugsGroup.map((elem, indx) => (
               <Fragment key={elem._id}>
                 <ListItem
                   title={elem.name}
@@ -56,12 +71,15 @@ class Drugs extends Component {
   }
 }
 
-const mapStateToProps = ({ drugs }) => ({
-  drugs,
+const mapStateToProps = ({ drugs: { drugsGroup, isLoading } }) => ({
+  drugsGroup,
+  isLoading,
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({}, dispatch),
+  actions: bindActionCreators({
+    ...drugsGroupActions,
+  }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Drugs);

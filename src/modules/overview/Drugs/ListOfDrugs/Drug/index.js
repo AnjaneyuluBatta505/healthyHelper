@@ -5,43 +5,66 @@ import { Card, Title, Paragraph } from 'react-native-paper';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 
-import getDrugInfo from './selectors';
+import { actions as drugsActions } from '../../../../../redux/overview/drugs';
+import Loader from '../../../../../components/Loader';
 
 import * as S from './styled';
 
 class Drug extends Component {
   static propTypes = {
-    info: PropTypes.shape({}).isRequired,
+    drugInfo: PropTypes.shape({}).isRequired,
     navigation: PropTypes.shape({}).isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    actions: PropTypes.shape({
+      getDrugInfoRequest: PropTypes.func,
+    }).isRequired,
   }
 
   static navigationOptions = () => ({
     title: 'Информация об лекарстве',
   })
 
-  handleClick = () => {
-    const { info } = this.props;
+  componentDidMount() {
+    const { actions, navigation } = this.props;
+    const drugId = navigation.getParam('drugId');
+    actions.getDrugInfoRequest(drugId);
+  }
 
-    Linking.canOpenURL(info.web).then((supported) => {
+  handleClick = () => {
+    const { drugInfo: { web } } = this.props;
+
+    Linking.canOpenURL(web).then((supported) => {
       if (supported) {
-        Linking.openURL(info.web);
+        Linking.openURL(web);
       } else {
-        console.log(`Don't know how to open URI: ${info.web}`);
+        console.log(`Don't know how to open URI: ${web}`);
       }
     });
   };
 
   render() {
-    const { info } = this.props;
+    const { drugInfo, isLoading } = this.props;
+
+    if (isLoading || Object.keys(drugInfo).length === 0) {
+      return <Loader />;
+    }
+
     const {
-      indicationsForUse,
-      methodOfApplication,
-      sideEffect,
-      contraindications,
-      dosageAdministration,
-      composition,
-      interactions,
-    } = info.instruction;
+      instruction: {
+        indicationsForUse,
+        methodOfApplication,
+        sideEffect,
+        contraindications,
+        dosageAdministration,
+        composition,
+        interactions,
+      },
+      name,
+      deliveryForm,
+      web,
+      manufacturer,
+      PH,
+    } = drugInfo;
 
     return (
       <S.Container>
@@ -49,15 +72,15 @@ class Drug extends Component {
           <S.Wrapp>
             <Card.Content>
               <Title>Общая информация</Title>
-              <S.StyledText>Препарат - <S.BoldText>{info.name}</S.BoldText></S.StyledText>
+              <S.StyledText>Препарат - <S.BoldText>{name}</S.BoldText></S.StyledText>
             </Card.Content>
             <Card.Content>
               {
-                !!info.deliveryForm && (
+                !!deliveryForm && (
                   <S.StyledText>
                     Форма выпуска -
                     <S.BoldText>
-                      {` ${info.deliveryForm}`}
+                      {` ${deliveryForm}`}
                     </S.BoldText>
                   </S.StyledText>
                 )
@@ -65,7 +88,7 @@ class Drug extends Component {
             </Card.Content>
             <Card.Content>
               {
-                !!info.deliveryForm && (
+                !!web && (
                   <TouchableOpacity onPress={this.handleClick}>
                     <S.Btn>
                     Доп. инфо
@@ -78,17 +101,17 @@ class Drug extends Component {
               <S.StyledText>
                 Производитель -
                 <S.BoldText>
-                  {info.manufacturer}
+                  {manufacturer}
                 </S.BoldText>
               </S.StyledText>
             </Card.Content>
             <Card.Content>
               {
-                !!info.PH && (
+                !!PH && (
                   <S.StyledText>
                     Фармакотерапевтическая группа (ФТГ):
                     <S.BoldText>
-                      {` ${info.PH}`}
+                      {` ${PH}`}
                     </S.BoldText>
                   </S.StyledText>
                 )
@@ -185,16 +208,15 @@ class Drug extends Component {
   }
 }
 
-const mapStateToProps = ({ drugs }, { navigation }) => {
-  const groupId = navigation.getParam('groupId');
-  const drugId = navigation.getParam('drugId');
-  return ({
-    info: getDrugInfo({ drugs, groupId, drugId }),
-  });
-};
+const mapStateToProps = ({ drugs: { isLoading, drugInfo } }) => ({
+  drugInfo,
+  isLoading,
+});
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({}, dispatch),
+  actions: bindActionCreators({
+    ...drugsActions,
+  }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Drug);

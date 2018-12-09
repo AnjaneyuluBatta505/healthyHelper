@@ -5,20 +5,31 @@ import { bindActionCreators } from 'redux';
 import { List, IconButton } from 'react-native-paper';
 import { ScrollView } from 'react-native';
 
+import { actions as drugsActions } from '../../../../redux/overview/drugs';
 import { Separator, ListItem } from '../../../../helpers/layout/List';
-import getListOfDrugs from './selectors';
+import Loader from '../../../../components/Loader';
 
 import * as S from './styled';
 
 class ListOfDrugs extends Component {
   static propTypes = {
     navigation: PropTypes.shape({}).isRequired,
-    drugs: PropTypes.shape({}).isRequired,
+    listOfDrugs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    actions: PropTypes.shape({
+      getListOfDrugsRequest: PropTypes.func,
+    }).isRequired,
   }
 
   static navigationOptions = ({ navigation }) => ({
     title: `${navigation.getParam('headerTitle', '')}`,
   })
+
+  componentDidMount() {
+    const { actions, navigation } = this.props;
+    const id = navigation.getParam('id');
+    actions.getListOfDrugsRequest(id);
+  }
 
   handleClick = id => () => {
     const { navigation } = this.props;
@@ -31,9 +42,11 @@ class ListOfDrugs extends Component {
   }
 
   render() {
-    const { drugs } = this.props;
+    const { listOfDrugs, isLoading } = this.props;
 
-    const info = drugs.saleNaming;
+    if (isLoading) {
+      return <Loader />;
+    }
 
     return (
       <List.Section>
@@ -41,7 +54,7 @@ class ListOfDrugs extends Component {
           <S.Container>
             <Separator />
             {
-              info.map(elem => (
+              listOfDrugs.map(elem => (
                 <Fragment key={elem._id}>
                   <ListItem
                     title={elem.name}
@@ -65,15 +78,15 @@ class ListOfDrugs extends Component {
   }
 }
 
-const mapStateToProps = ({ drugs }, { navigation }) => {
-  const id = navigation.getParam('id');
-  return ({
-    drugs: getListOfDrugs({ drugs, id }),
-  });
-};
+const mapStateToProps = ({ drugs: { listOfDrugs, isLoading } }) => ({
+  listOfDrugs,
+  isLoading,
+});
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({}, dispatch),
+  actions: bindActionCreators({
+    ...drugsActions,
+  }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListOfDrugs);

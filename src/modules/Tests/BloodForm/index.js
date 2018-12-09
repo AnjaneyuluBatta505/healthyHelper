@@ -249,14 +249,14 @@ class BloodForm extends Component {
             value={sex}
           >
             <View>
-              <Text>Муж-ой</Text>
+              <Text>М</Text>
               <S.RadioBtn
                 color="#6200ee"
                 value="man"
               />
             </View>
             <View>
-              <Text>Жен-ий</Text>
+              <Text>Ж</Text>
               <S.RadioBtn
                 color="#6200ee"
                 value="woman"

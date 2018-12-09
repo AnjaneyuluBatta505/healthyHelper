@@ -36,7 +36,7 @@ class Overview extends Component {
         });
         break;
       case 0:
-        navigation.navigate('Interaction', {
+        navigation.navigate('Drugs', {
           headerTitle: 'Меню',
         });
         break;
