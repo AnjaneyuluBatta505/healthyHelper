@@ -1,11 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { ScrollView } from 'react-native';
 import update from 'immutability-helper';
 import { Card, Paragraph, Searchbar, List, Title } from 'react-native-paper';
 
 import { Separator } from '../../../helpers/layout/List';
+import Loader from '../../../components/Loader';
+import { actions as interactionActions } from '../../../redux/overview/drugs/integration';
 import getData from './selectors';
 
 import * as S from './styled';
@@ -15,28 +18,44 @@ class Interaction extends Component {
 
   static propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    actions: PropTypes.shape({
+      getDataByStringRequest: PropTypes.func,
+    }).isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    searchString: PropTypes.string.isRequired,
+  }
+
+  state = {
+    data: [],
   }
 
   /* eslint-disable */
-  state = {
-    searchString: '',
-    outputSting: '',
-    data: this.props.data,
-    renderItemCount: null,
+  componentDidUpdate(prevProps) {
+    const { data } = this.props;
+
+    if (prevProps.data !== data) {
+      this.setState({ data });
+    }
   }
   /* eslint-enable */
 
-  handlePress = indx => () => this.setState(({ data }) => ({
-    data: update(data, { [indx]: { expanded: { $set: !data[indx].expanded } } }),
-  }))
+  handlePress = id => () => {
+    const { data } = this.state;
+    const indx = data.findIndex(({ _id }) => _id === id);
 
-  handleInput = value => this.setState({
-    searchString: value.trim().toLowerCase(),
-    outputSting: value,
-  })
+    this.setState(({ data }) => ({
+      data: update(data, { [indx]: { expanded: { $set: !data[indx].expanded } } }),
+    }));
+  }
+
+  handleInput = (value) => {
+    const { actions } = this.props;
+    actions.setSearchString(value);
+  }
 
   render() {
-    const { searchString, data, outputSting } = this.state;
+    const { data } = this.state;
+    const { isLoading, searchString } = this.props;
 
     return (
       <Fragment>
@@ -46,20 +65,20 @@ class Interaction extends Component {
         <Searchbar
           placeholder="Азими..."
           onChangeText={query => this.handleInput(query)}
-          value={outputSting}
+          value={searchString}
         />
-        <List.Section>
-          <ScrollView>
-            <Separator />
-            {
-              data.map(({ _id, name, expanded, interactions }, index) => {
-                if (searchString.length >= 2 && name.indexOf(searchString) >= 0) {
-                  return (
+        {
+          !isLoading ? (
+            <List.Section>
+              <ScrollView>
+                <Separator />
+                {
+                  data.map(({ _id, name, interactions, expanded }) => (
                     <List.Accordion
                       key={_id}
                       title={name}
                       expanded={expanded}
-                      onPress={this.handlePress(index)}
+                      onPress={this.handlePress(_id)}
                     >
                       <Separator />
                       <S.Wrapp>
@@ -72,21 +91,27 @@ class Interaction extends Component {
                       </S.Wrapp>
                       <Separator />
                     </List.Accordion>
-                  );
-                }
-
-                return null;
-              })
-          }
-          </ScrollView>
-        </List.Section>
+                  ))
+              }
+              </ScrollView>
+            </List.Section>
+          ) : <Loader />
+        }
       </Fragment>
     );
   }
 }
 
-const mapStateToProps = ({ drugs }) => ({
-  data: getData({ drugs }),
+const mapStateToProps = ({ intagration: { data, isLoading, searchString } }) => ({
+  data: getData({ data }),
+  isLoading,
+  searchString,
 });
 
-export default connect(mapStateToProps, null)(Interaction);
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators({
+    ...interactionActions,
+  }, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Interaction);

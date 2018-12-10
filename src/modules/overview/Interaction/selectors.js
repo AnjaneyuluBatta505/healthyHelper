@@ -1,13 +1,7 @@
 import { createSelector } from 'reselect';
 
-const prepareData = ({ drugs }) => drugs.data.map(({ saleNaming }) => (saleNaming))
-  .reduce((sum, curr) => ([...sum, ...curr]))
-  .map(({ name, instruction, _id }) => ({
-    _id,
-    name: name.toLowerCase(),
-    interactions: instruction.interactions,
-    expanded: false,
-  }));
+const prepareData = ({ data }) => data
+  .map(({ _id, name, instruction: { interactions } }) => ({ _id, name, interactions, expanded: false }));
 
 const getData = createSelector(
   [prepareData],

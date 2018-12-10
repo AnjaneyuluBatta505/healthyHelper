@@ -30,22 +30,22 @@ class Overview extends Component {
   handleClick = i => () => {
     const { navigation } = this.props;
     switch (i) {
-      case 3:
-        navigation.navigate('Drugs', {
-          headerTitle: 'Меню',
-        });
-        break;
       case 0:
         navigation.navigate('Drugs', {
           headerTitle: 'Меню',
         });
         break;
       case 1:
-        navigation.navigate('Tests', {
+        navigation.navigate('Interaction', {
           headerTitle: 'Меню',
         });
         break;
       case 2:
+        navigation.navigate('Tests', {
+          headerTitle: 'Меню',
+        });
+        break;
+      case 3:
         navigation.navigate('AltMedicine', {
           headerTitle: 'Меню',
         });
