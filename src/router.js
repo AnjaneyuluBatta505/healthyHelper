@@ -28,7 +28,7 @@ const headerStyles = {
 
 const HomeStack = createStackNavigator(
   {
-    Home: Overview,
+    Overview,
     AltMedicine,
     BloodForm,
     Drug,
@@ -37,7 +37,7 @@ const HomeStack = createStackNavigator(
     HormonesForm,
     Interaction,
     ListOfDrugs,
-    Tests,
+    Home: Tests,
     WeeForm,
   },
   headerStyles,

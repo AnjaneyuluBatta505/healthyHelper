@@ -25,13 +25,18 @@ export const Container = styled.View`
 export const InputWrapper = styled.View`
   display: flex;
   flexDirection: column;
-  width: 45%;
+  width: 100%;
   justifyContent: center;
 `;
 
 export const SButton = styled(Button)`
   width: 70%;
   marginTop: 40px;
+`;
+
+export const RadioWrap = styled.View`
+  display: flex;
+  alignItems: center;
 `;
 
 export const Wrapper = styled.View`
