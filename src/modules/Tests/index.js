@@ -14,6 +14,12 @@ const analysis = [
   {
     id: `$_${Math.random().toString(36).substr(2, 9)}`,
     value: 'Анализ крови',
+    route: 'GeneralBloodTest',
+    iconName: 'testtube',
+  },
+  {
+    id: `$_${Math.random().toString(36).substr(2, 9)}`,
+    value: 'Общий анализ крови',
     route: 'BloodForm',
     iconName: 'testtube',
   },
@@ -91,4 +97,4 @@ class Tests extends Component {
   }
 }
 
-export default Tests;
+export default (Tests);

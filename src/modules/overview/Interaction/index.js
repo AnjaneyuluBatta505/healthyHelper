@@ -59,9 +59,6 @@ class Interaction extends Component {
 
     return (
       <Fragment>
-        <S.Container>
-          <Paragraph>Введите как минимум 2 символа для поиска</Paragraph>
-        </S.Container>
         <Searchbar
           placeholder="Азими..."
           onChangeText={query => this.handleInput(query)}

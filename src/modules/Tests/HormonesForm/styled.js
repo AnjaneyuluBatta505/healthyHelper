@@ -15,8 +15,6 @@ export const Container = styled.View`
   display: flex;
   flexDirection: row;
   flexWrap: wrap;
-  height: 100%;
-  width: 100%;
   justifyContent: space-between;
   alignItems: center;
   margin: 5px;
@@ -38,8 +36,7 @@ export const SButton = styled(Button)`
 
 export const Wrapper = styled.View`
   display: flex;
-  justifyContent: center;
-  height: 100%;
-  width: 100%;
+  alignItems: center;
   backgroundColor: ${({ theme }) => theme.colors.background};
+  height: 100%;
 `;

@@ -8,7 +8,6 @@ import configureStore from './redux/configureStore';
 import AppNavigator from './router';
 import theme from './theme';
 
-
 const App = reduxifyNavigator(AppNavigator, 'root');
 
 const mapStateToProps = ({ nav }) => ({

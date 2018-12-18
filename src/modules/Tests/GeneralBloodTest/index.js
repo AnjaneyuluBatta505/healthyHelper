@@ -8,108 +8,145 @@ import * as S from './styled';
 
 const Indicators = [
   {
-    id: 'wheyIron',
+    id: 'glucose',
     value: '',
     info: '',
-    unit: 'мкмоль/л',
+    unit: 'ммоль/л',
     error: '',
     flag: 'unit',
-    label: 'Железо сыворочное',
+    label: 'Глюкоза',
     limits: {
       man: {
-        maxLimit: 28.6,
-        minLimit: 10.7,
+        maxLimit: 5.3,
+        minLimit: 3.5,
       },
       woman: {
-        maxLimit: 25.9,
-        minLimit: 7.2,
+        maxLimit: 5.3,
+        minLimit: 3.5,
       },
     },
   },
   {
-    id: 'ferritin',
+    id: 'hemoglobin',
     value: '',
     info: '',
-    unit: 'мкг/л',
+    unit: 'g/dL',
     error: '',
     flag: 'unit',
-    label: 'Ферритин',
+    label: 'Конц. гемоглобина',
     limits: {
       man: {
-        maxLimit: 250,
-        minLimit: 20,
+        maxLimit: 17.5,
+        minLimit: 13,
       },
       woman: {
-        maxLimit: 120,
-        minLimit: 10,
+        maxLimit: 15.7,
+        minLimit: 12,
       },
     },
   },
   {
-    id: 'tsh',
+    id: 'leukocytes',
     value: '',
     info: '',
-    unit: 'мЕд/л',
+    unit: '*10^3/μL',
     error: '',
     flag: 'unit',
-    label: 'Тиреотропный гормон',
+    label: 'Конц. лейкоцитов',
     limits: {
       man: {
-        maxLimit: 4,
-        minLimit: 0.4,
+        maxLimit: 9,
+        minLimit: 4,
       },
       woman: {
-        maxLimit: 4,
-        minLimit: 0.4,
+        maxLimit: 9,
+        minLimit: 4,
       },
     },
   },
   {
-    id: 'cortisol',
+    id: 'erythrocytes',
     value: '',
     info: '',
-    unit: 'нмоль/л',
+    unit: '*10^3/μL',
     error: '',
     flag: 'unit',
-    label: 'Кортизол',
+    label: 'Кол-во эритроцитов',
     limits: {
       man: {
-        maxLimit: 635,
-        minLimit: 138,
+        maxLimit: 6.08,
+        minLimit: 4.9,
       },
       woman: {
-        maxLimit: 635,
-        minLimit: 138,
+        maxLimit: 5.1,
+        minLimit: 3.7,
       },
     },
   },
   {
-    id: 'prolactinum',
+    id: 'hematocrit',
     value: '',
     info: '',
-    unit: 'мЕд/л',
+    unit: '%',
     flag: 'unit',
-    label: 'Пролактин',
+    label: 'Гематокрит',
     limits: {
       man: {
-        maxLimit: 407,
-        minLimit: 73,
+        maxLimit: 50,
+        minLimit: 39,
       },
       woman: {
-        maxLimit: 557,
-        minLimit: 109,
+        maxLimit: 47,
+        minLimit: 35,
+      },
+    },
+  },
+  {
+    id: 'numbPlatelets',
+    value: '',
+    info: '',
+    unit: '*10^3/μL',
+    error: '',
+    flag: 'unit',
+    label: 'Кол-во тромбоцитов',
+    limits: {
+      man: {
+        maxLimit: 400,
+        minLimit: 150,
+      },
+      woman: {
+        maxLimit: 400,
+        minLimit: 150,
+      },
+    },
+  },
+  {
+    id: 'esr',
+    value: '',
+    info: '',
+    unit: 'мм/час',
+    error: '',
+    flag: 'unit',
+    label: 'СОЭ',
+    limits: {
+      man: {
+        maxLimit: 15,
+        minLimit: 2,
+      },
+      woman: {
+        maxLimit: 20,
+        minLimit: 2,
       },
     },
   },
 ];
 
-
-class HormonesForm extends Component {
+class BloodForm extends Component {
   static propTypes = {
     navigation: PropTypes.shape({}).isRequired,
   }
 
-  static navigationOptions = () => ({ title: 'Гормоны' });
+  static navigationOptions = () => ({ title: 'Общий анализ крови' });
 
   state = { indicators: [...Indicators], sex: 'man' }
 
@@ -154,16 +191,21 @@ class HormonesForm extends Component {
         return this.showInfo(i, { flag: 'error', error: 'Недопустимый формат' });
       }
 
-      if (value > limits[sex].maxLimit) {
-        return this.showInfo(i, { flag: 'info', info: 'Превышена норма' });
-      }
+      console.log(123)
+      // if (value > limits[sex].maxLimit) {
+      //   return this.showInfo(i, { flag: 'info', info: 'Превышена норма' });
+      // }
 
-      if (value < limits[sex].minLimit) {
-        return this.showInfo(i, { flag: 'info', info: 'Значение ниже нормы' });
-      }
+      // if (value < limits[sex].minLimit) {
+      //   return this.showInfo(i, { flag: 'info', info: 'Значение ниже нормы' });
+      // }
 
-      return this.showInfo(i, { flag: 'info', info: 'Норма' });
+      // return this.showInfo(i, { flag: 'info', info: 'Норма' });
     });
+  }
+
+  validate = (values) => () => {
+    console.log(321)
   }
 
   getInfoByFlag = (flag, info, error, unit) => {
@@ -197,6 +239,7 @@ class HormonesForm extends Component {
                       value={value}
                       error={error && error}
                       onChangeText={text => this.handleChange(text, indx)}
+                      onBlure={this.validate}
                     />
                     <S.UnitText
                       type={flag === 'unit' || flag === 'info' ? 'info' : 'error'}
@@ -241,4 +284,4 @@ class HormonesForm extends Component {
   }
 }
 
-export default HormonesForm;
+export default BloodForm;
