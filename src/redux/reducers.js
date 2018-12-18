@@ -7,6 +7,7 @@ import auth from './auth/index';
 import overview from './overview';
 import drugs from './overview/drugs';
 import intagration from './overview/drugs/integration';
+import snackbar from './snackbar';
 
 const navReducer = createNavigationReducer(AppNavigator);
 
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   overview,
   drugs,
   intagration,
+  snackbar,
 });
 
 export default rootReducer;
