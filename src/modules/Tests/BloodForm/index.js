@@ -16,27 +16,30 @@ class BloodForm extends Component {
 
   static navigationOptions = () => ({ title: 'Анализ Крови' });
 
-  state = { isVisible: false }
+  state = { isVisible: false, values: {} }
 
   _showDialog = () => this.setState({ isVisible: true });
 
-  _hideDialog = () => this.setState({ isVisible: false });
+  hideDialog = () => this.setState({ isVisible: false });
 
-  onSubmit = (values) => {
-    this._showDialog({ values });
-  }
+  onSubmit = values => this.setState({ values }, this._showDialog())
 
 
   render() {
-    const { isVisible } = this.state;
+    const { isVisible, values } = this.state;
 
     return (
       <S.Wrapper>
         <ScrollView>
-          <Dialog
-            isVisible={isVisible}
-            hideDialog={this._hideDialog}
-          />
+          {
+            isVisible && (
+              <Dialog
+                isVisible={isVisible}
+                hideDialog={this.hideDialog}
+                values={values}
+              />
+            )
+          }
           <S.Wrapper>
             <View>
               <Form

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { List, IconButton } from 'react-native-paper';
 
-import * as S from './styled';
+import { ListItem, Separator, ItemIcon, TitleIcon } from '../../helpers/layout/List';
 
 const analysis = [
   // {
@@ -67,17 +67,17 @@ class Tests extends Component {
       <List.Section>
         <List.Accordion
           title="Healthy Helper features"
-          left={props => <S.TitleIcon {...props} name="test" size={40} />}
+          left={props => <TitleIcon {...props} name="test" size={40} />}
           expanded={expanded}
           onPress={this.handlePress}
         >
-          <S.Separator />
+          <Separator />
           {
             analysis.map(elem => (
               <Fragment key={elem.id}>
-                <S.ListItem
+                <ListItem
                   title={elem.value}
-                  left={props => <S.ItemIcon {...props} name={elem.iconName} size={35} />}
+                  left={props => <ItemIcon {...props} name={elem.iconName} size={35} />}
                   onPress={this.handleClick(elem.id)}
                   right={() => (
                     <IconButton
@@ -87,7 +87,7 @@ class Tests extends Component {
                     />
                   )}
                 />
-                <S.Separator />
+                <Separator />
               </Fragment>
             ))
           }
