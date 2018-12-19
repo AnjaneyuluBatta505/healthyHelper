@@ -52,19 +52,19 @@ class BloodForm extends Component {
                         return (
                           <S.InputWrapper key={id}>
                             <Field name={id}>
-                              {({ input, meta }) => (
+                              {({ input, meta: { error, touched } }) => (
                                 <Fragment>
                                   <S.Input
                                     {...input}
                                     label={label}
-                                    error={meta && meta.error}
+                                    error={error && touched}
                                   />
                                   <S.UnitText
-                                    type={(meta && meta.error) ? 'error' : 'info'}
+                                    type={(error && touched) ? 'error' : 'info'}
                                     visible="true"
                                   >
                                     {
-                                      (meta && meta.error) || unit
+                                      ((error && touched) && error) || unit
                                     }
                                   </S.UnitText>
                                 </Fragment>
