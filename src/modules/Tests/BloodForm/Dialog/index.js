@@ -108,7 +108,7 @@ class Dialog extends Component {
                             <Divider />
                             <S.Container>
                               <Paragraph>
-                                Норма: {limits[sex].minLimit} - {limits[sex].maxLimit}
+                              Референсные значения: {limits[sex].minLimit} - {limits[sex].maxLimit}
                               </Paragraph>
                               <Paragraph>
                                 {unit}
@@ -116,7 +116,7 @@ class Dialog extends Component {
                             </S.Container>
                             <S.Container>
                               <Paragraph>
-                                Ваш показатель: {rest[id]}
+                              Результат: {rest[id]}
                               </Paragraph>
                               <Paragraph>
                                 {unit}

@@ -5,18 +5,18 @@ import { List, IconButton } from 'react-native-paper';
 import { ListItem, Separator, ItemIcon, TitleIcon } from '../../helpers/layout/List';
 
 const analysis = [
-  // {
-  //   id: `$_${Math.random().toString(36).substr(2, 9)}`,
-  //   value: 'Анализ мочи',
-  //   route: 'wee',
-  //   iconName: 'urine',
-  // },
   {
     id: `$_${Math.random().toString(36).substr(2, 9)}`,
-    value: 'Анализ крови',
-    route: 'GeneralBloodTest',
-    iconName: 'testtube',
+    value: 'Анализ мочи',
+    route: 'UrineForm',
+    iconName: 'urine',
   },
+  // {
+  //   id: `$_${Math.random().toString(36).substr(2, 9)}`,
+  //   value: 'Анализ крови',
+  //   route: 'GeneralBloodTest',
+  //   iconName: 'testtube',
+  // },
   {
     id: `$_${Math.random().toString(36).substr(2, 9)}`,
     value: 'Общий анализ крови',
@@ -29,12 +29,12 @@ const analysis = [
   //   route: 'vitamins',
   //   iconName: 'vitamins',
   // },
-  {
-    id: `$_${Math.random().toString(36).substr(2, 9)}`,
-    value: 'Гормоны',
-    route: 'HormonesForm',
-    iconName: 'balance',
-  },
+  // {
+  //   id: `$_${Math.random().toString(36).substr(2, 9)}`,
+  //   value: 'Гормоны',
+  //   route: 'HormonesForm',
+  //   iconName: 'balance',
+  // },
 ];
 
 class Tests extends Component {

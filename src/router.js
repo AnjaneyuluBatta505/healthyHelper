@@ -10,7 +10,7 @@ import HormonesForm from './modules/Tests/HormonesForm';
 import Interaction from './modules/overview/Interaction';
 import Overview from './modules/overview';
 import ListOfDrugs from './modules/overview/Drugs/ListOfDrugs';
-import WeeForm from './modules/Tests/WeeForm';
+import UrineForm from './modules/Tests/UrineForm';
 
 const headerStyles = {
   initialRouteName: 'Home',
@@ -38,7 +38,7 @@ const HomeStack = createStackNavigator(
     Interaction,
     ListOfDrugs,
     Home: Tests,
-    WeeForm,
+    UrineForm,
   },
   headerStyles,
 );
