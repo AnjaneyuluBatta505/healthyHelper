@@ -1,7 +1,11 @@
 import styled from 'styled-components/native';
-import { TextInput, HelperText, Button, RadioButton, Card } from 'react-native-paper';
+import { TextInput, HelperText, Button, RadioButton, Card, Text } from 'react-native-paper';
 
 export const RadioBtn = styled(RadioButton)``;
+
+export const RaioLabel = styled(Text)`
+  width: 200;
+`;
 
 export const Input = styled(TextInput)`
   width: 100%;
@@ -39,13 +43,12 @@ export const RadioWrap = styled.View`
   alignItems: center;
   flexDirection: row;
   justifyContent: space-between;
-  width: 75%;
+  width: 100%;
 `;
 
 export const Wrapper = styled.View`
   display: flex;
   alignItems: center;
-  backgroundColor: ${({ theme }) => theme.colors.background};
   height: 100%;
 `;
 
@@ -67,4 +70,5 @@ export const BtnWrapper = styled.View`
   flexDirection: row;
   justifyContent: space-between;
   marginTop: 20px;
+  width: 100%;
 `;

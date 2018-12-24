@@ -1,19 +1,16 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent, Fragment } from 'react';
 import { ScrollView } from 'react-native';
-import { Text, Headline, Card, Title, IconButton } from 'react-native-paper';
+import { Headline, Card, Title, IconButton } from 'react-native-paper';
 import { Form, Field } from 'react-final-form';
 
-// import Dialog from './Dialog';
 import { validate } from './validate';
 import { Indicators } from './config';
 import * as S from './styled';
 
-class UrineForm extends Component {
-  static propTypes = {
-    navigation: PropTypes.shape({}).isRequired,
-  }
+const MAX_PAGE_COUNT = 3;
+const MIN_PAGE_COUNT = 0;
 
+class UrineForm extends PureComponent {
   static navigationOptions = () => ({ title: 'Анализ мочи общий' });
 
   state = { isVisible: false, values: {}, page: 0 }
@@ -28,87 +25,103 @@ class UrineForm extends Component {
 
   onSubmit = values => this.setState({ values }, this._showDialog())
 
-
   render() {
     const { isVisible, values, page } = this.state;
 
     return (
-      <S.Wrapper>
-        <ScrollView>
-          <Headline>{Indicators[page].label}</Headline>
+      <ScrollView>
+        <S.Wrapper>
+          <Headline style={{ textAlign: 'center' }}>{Indicators[page].label}</Headline>
           <Form
             onSubmit={this.onSubmit}
             validate={validate}
-            subscription={{ handleSubmit: true, pristine: true, invalid: true, values: true }}
-            render={({ handleSubmit, pristine, invalid, values }) => (
+            subscription={{ handleSubmit: true, invalid: true, values: true }}
+            render={({ handleSubmit, values, invalid }) => (
               <S.FormContainer>
                 {
-                  Indicators[page].indicators.map((elem) => {
-                    return (
-                      <S.CardContainer key={`${elem.id}${elem.value}`}>
-                        <Card.Content>
-                          <Title>{elem.label}</Title>
-                          {
-                            elem.inputs.map((el, i) => {
-                              if (el.type === 'input') {
-                                return (
-                                  <S.InputWrapper key={`${el.id}${el.value}`}>
-                                    <Field name={el.id}>
-                                      {({ input, meta: { error, touched } }) => (
-                                        <Fragment>
-                                          <S.Input
-                                            {...input}
-                                            label={el.label}
-                                            error={error && touched}
-                                          />
-                                          <S.UnitText
-                                            type={(error && touched) ? 'error' : 'info'}
-                                            visible="true"
-                                          >
-                                            {
-                                              ((error && touched) && error) || el.unit
-                                            }
-                                          </S.UnitText>
-                                        </Fragment>
-                                      )}
-                                    </Field>
-                                  </S.InputWrapper>
-                                );
-                              }
-
+                  Indicators[page].indicators.map(elem => (
+                    <S.CardContainer key={`${elem.id}${elem.value}`}>
+                      <Card.Content>
+                        {
+                          elem.label ? <Title>{elem.label}</Title> : null
+                        }
+                        {
+                          elem.inputs.map(({ id, type, value, unit, label }) => {
+                            if (type === 'input') {
                               return (
-                                <Field key={`${el.id}${el.value}`} name={`${elem.value}`} value={el.value} type="radio">
-                                  {({ input }) => (
-                                    <S.RadioWrap>
-                                      <Text>{i}. {el.label}</Text>
-                                      <S.RadioBtn
-                                        {...input}
-                                        color="#6200ee"
-                                        status={values[elem.value] === el.value ? 'checked' : 'unchecked'}
-                                        onPress={() => input.onChange(el.value)}
-                                      />
-                                    </S.RadioWrap>
-                                  )}
-                                </Field>
+                                <S.InputWrapper key={`${id}${value}`}>
+                                  <Field name={id}>
+                                    {({ input, meta: { error, touched } }) => (
+                                      <Fragment>
+                                        <S.Input
+                                          {...input}
+                                          label={label}
+                                          error={error && touched}
+                                        />
+                                        <S.UnitText
+                                          type={(error && touched) ? 'error' : 'info'}
+                                          visible="true"
+                                        >
+                                          {
+                                            ((error && touched) && error) || unit
+                                          }
+                                        </S.UnitText>
+                                      </Fragment>
+                                    )}
+                                  </Field>
+                                </S.InputWrapper>
                               );
-                            })
-                          }
-                        </Card.Content>
-                      </S.CardContainer>
-                    );
-                  })
+                            }
+
+                            return (
+                              <Field key={`${id}${value}`} name={`${elem.value}`} value={value} type="radio">
+                                {({ input: { onChange, ...rest } }) => (
+                                  <S.RadioWrap>
+                                    <S.RaioLabel>{label}</S.RaioLabel>
+                                    <S.RadioBtn
+                                      {...rest}
+                                      color="#6200ee"
+                                      status={values[elem.value] === value ? 'checked' : 'unchecked'}
+                                      onPress={() => onChange(value)}
+                                    />
+                                  </S.RadioWrap>
+                                )}
+                              </Field>
+                            );
+                          })
+                        }
+                      </Card.Content>
+                    </S.CardContainer>
+                  ))
+                }
+                {
+                  page === MAX_PAGE_COUNT ? (
+                    <S.SButton
+                      type="submit"
+                      icon="search"
+                      mode="contained"
+                      disabled={invalid}
+                      onPress={handleSubmit}
+                    >
+                      Проверить
+                    </S.SButton>
+                  )
+                    : null
                 }
               </S.FormContainer>
             )}
           />
           <S.BtnWrapper>
             <IconButton
+              disabled={page === MIN_PAGE_COUNT}
               icon="navigate-before"
               size={80}
               style={{ height: 80, width: 80 }}
               onPress={this.goBack()}
             />
+            <Headline style={{ textAlign: 'center' }}>{page + 1}/{MAX_PAGE_COUNT + 1}</Headline>
             <IconButton
+              disabled={page === MAX_PAGE_COUNT}
               icon="navigate-next"
               size={80}
               style={{ height: 80, width: 80 }}
@@ -116,8 +129,8 @@ class UrineForm extends Component {
             />
 
           </S.BtnWrapper>
-        </ScrollView>
-      </S.Wrapper>
+        </S.Wrapper>
+      </ScrollView>
     );
   }
 }
