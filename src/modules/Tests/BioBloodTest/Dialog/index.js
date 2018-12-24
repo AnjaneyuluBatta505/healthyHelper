@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Paragraph, Dialog as PaperDialog, Portal, List, Card, Title, Divider } from 'react-native-paper';
 import { View, ScrollView } from 'react-native';
@@ -14,7 +14,7 @@ const IconNames = {
   normal: 'correct-symbol',
 };
 
-class Dialog extends Component {
+class Dialog extends PureComponent {
   state = {
     data: Indicators.map(el => ({ ...el, expanded: false })),
   }

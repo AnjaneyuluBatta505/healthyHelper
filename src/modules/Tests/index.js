@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent, Fragment } from 'react';
 import { List, IconButton } from 'react-native-paper';
 
 import { ListItem, Separator, ItemIcon, TitleIcon } from '../../helpers/layout/List';
@@ -11,37 +10,21 @@ const analysis = [
     route: 'UrineForm',
     iconName: 'urine',
   },
-  // {
-  //   id: `$_${Math.random().toString(36).substr(2, 9)}`,
-  //   value: 'Анализ крови',
-  //   route: 'GeneralBloodTest',
-  //   iconName: 'testtube',
-  // },
   {
     id: `$_${Math.random().toString(36).substr(2, 9)}`,
     value: 'Общий анализ крови',
     route: 'BloodForm',
     iconName: 'testtube',
   },
-  // {
-  //   id: `$_${Math.random().toString(36).substr(2, 9)}`,
-  //   value: 'Витамины',
-  //   route: 'vitamins',
-  //   iconName: 'vitamins',
-  // },
-  // {
-  //   id: `$_${Math.random().toString(36).substr(2, 9)}`,
-  //   value: 'Гормоны',
-  //   route: 'HormonesForm',
-  //   iconName: 'balance',
-  // },
+  {
+    id: `$_${Math.random().toString(36).substr(2, 9)}`,
+    value: 'Биохимический анализ крови',
+    route: 'BioBloodTest',
+    iconName: 'testtube',
+  },
 ];
 
-class Tests extends Component {
-  static propTypes = {
-    navigation: PropTypes.shape({}).isRequired,
-  }
-
+class Tests extends PureComponent {
   static navigationOptions = () => ({ title: 'Analyses' });
 
   state = {

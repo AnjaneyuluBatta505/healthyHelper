@@ -5,8 +5,7 @@ import Tests from './modules/Tests';
 import BloodForm from './modules/Tests/BloodForm';
 import Drug from './modules/overview/Drugs/ListOfDrugs/Drug';
 import Drugs from './modules/overview/Drugs';
-import GeneralBloodTest from './modules/Tests/GeneralBloodTest';
-import HormonesForm from './modules/Tests/HormonesForm';
+import BioBloodTest from './modules/Tests/BioBloodTest';
 import Interaction from './modules/overview/Interaction';
 import Overview from './modules/overview';
 import ListOfDrugs from './modules/overview/Drugs/ListOfDrugs';
@@ -30,11 +29,10 @@ const HomeStack = createStackNavigator(
   {
     Overview,
     AltMedicine,
+    BioBloodTest,
     BloodForm,
     Drug,
     Drugs,
-    GeneralBloodTest,
-    HormonesForm,
     Interaction,
     ListOfDrugs,
     Home: Tests,
