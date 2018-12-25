@@ -73,4 +73,4 @@ export const altMedicineData = [
 ];
 /* eslint-enable */
 
-export const blank = () => {}
+export const blank = () => {};

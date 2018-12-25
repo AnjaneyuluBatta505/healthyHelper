@@ -97,7 +97,7 @@ class Dialog extends PureComponent {
                     return (
                       <Fragment key={id}>
                         <List.Accordion
-                          title={this._getLabel(id, limits, unit)}
+                          title={this._getLabel(id, limits)}
                           left={props => this._getIcon(props, id, limits)}
                           expanded={expanded}
                           onPress={this.handlePress(indx)}

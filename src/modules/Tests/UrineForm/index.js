@@ -1,8 +1,9 @@
 import React, { PureComponent, Fragment } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { Headline, Card, Title, IconButton } from 'react-native-paper';
 import { Form, Field } from 'react-final-form';
 
+import Dialog from './Dialog';
 import { validate } from './validate';
 import { Indicators } from './config';
 import * as S from './styled';
@@ -35,8 +36,8 @@ class UrineForm extends PureComponent {
           <Form
             onSubmit={this.onSubmit}
             validate={validate}
-            subscription={{ handleSubmit: true, invalid: true, values: true }}
-            render={({ handleSubmit, values, invalid }) => (
+            subscription={{ handleSubmit: true, values: true }}
+            render={({ handleSubmit, values }) => (
               <S.FormContainer>
                 {
                   Indicators[page].indicators.map(elem => (
@@ -75,16 +76,28 @@ class UrineForm extends PureComponent {
 
                             return (
                               <Field key={`${id}${value}`} name={`${elem.value}`} value={value} type="radio">
-                                {({ input: { onChange, ...rest } }) => (
-                                  <S.RadioWrap>
-                                    <S.RaioLabel>{label}</S.RaioLabel>
-                                    <S.RadioBtn
-                                      {...rest}
-                                      color="#6200ee"
-                                      status={values[elem.value] === value ? 'checked' : 'unchecked'}
-                                      onPress={() => onChange(value)}
-                                    />
-                                  </S.RadioWrap>
+                                {({ input: { onChange, ...rest }, meta: { error, touched } }) => (
+                                  <View>
+                                    <S.RadioWrap>
+                                      <S.RaioLabel>{label}</S.RaioLabel>
+                                      <S.RadioBtn
+                                        {...rest}
+                                        color="#6200ee"
+                                        status={values[elem.value] === value ? 'checked' : 'unchecked'}
+                                        onPress={() => onChange(value)}
+                                      />
+                                    </S.RadioWrap>
+                                    {
+                                      error && touched && (
+                                        <S.UnitText
+                                          type="error"
+                                          visible="true"
+                                        >
+                                          {error}
+                                        </S.UnitText>
+                                      )
+                                    }
+                                  </View>
                                 )}
                               </Field>
                             );
@@ -100,7 +113,6 @@ class UrineForm extends PureComponent {
                       type="submit"
                       icon="search"
                       mode="contained"
-                      disabled={invalid}
                       onPress={handleSubmit}
                     >
                       Проверить
@@ -130,6 +142,15 @@ class UrineForm extends PureComponent {
 
           </S.BtnWrapper>
         </S.Wrapper>
+        {
+          isVisible && (
+            <Dialog
+              isVisible={isVisible}
+              hideDialog={this.hideDialog}
+              values={values}
+            />
+          )
+        }
       </ScrollView>
     );
   }

@@ -18,14 +18,14 @@ const analysis = [
   },
   {
     id: `$_${Math.random().toString(36).substr(2, 9)}`,
-    value: 'Биохимический анализ крови',
+    value: 'Биохим. анализ крови',
     route: 'BioBloodTest',
-    iconName: 'testtube',
+    iconName: 'syringe',
   },
 ];
 
 class Tests extends PureComponent {
-  static navigationOptions = () => ({ title: 'Analyses' });
+  static navigationOptions = () => ({ title: 'Анализы' });
 
   state = {
     expanded: true,
