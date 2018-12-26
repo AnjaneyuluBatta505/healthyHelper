@@ -1,118 +1,78 @@
-// import { Indicators } from './config';
-
-export const undefCheck = value => typeof value !== 'undefined';
-
-const numbCheck = value => Number.isNaN(parseInt(value, 10));
+import { isNumber } from '../../../helpers/regexp';
 
 export const validate = (values) => {
   const errors = {};
 
-  if (!values.RBC) {
-    // errors.RBC = 'Обязательное поле';
-  } else if (numbCheck(values.RBC)) {
-    errors.RBC = 'Недопустимый формат';
+  if (values.RBC && !isNumber.test(values.RBC)) {
+    errors.RBC = 'Введите число';
   }
 
-  if (!values.Hb) {
-    // errors.Hb = 'Обязательное поле';
-  } else if (numbCheck(values.Hb)) {
-    errors.Hb = 'Недопустимый формат';
+  if (values.RBC && !isNumber.test(values.RBC)) {
+    errors.RBC = 'Введите число';
   }
 
-  if (!values.HTC) {
-    // errors.HTC = 'Обязательное поле';
-  } else if (numbCheck(values.HTC)) {
-    errors.HTC = 'Недопустимый формат';
+  if (values.RBC && !isNumber.test(values.RBC)) {
+    errors.RBC = 'Введите число';
   }
 
-  if (!values.MCV) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.MCV)) {
-    errors.MCV = 'Недопустимый формат';
+  if (values.ESR && !isNumber.test(values.ESR)) {
+    errors.ESR = 'Введите число';
   }
 
-  if (!values.МСН) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.МСН)) {
-    errors.МСН = 'Недопустимый формат';
+  if (values.MO_RELATIVE && !isNumber.test(values.MO_RELATIVE)) {
+    errors.MO_RELATIVE = 'Введите число';
   }
 
-  if (!values.МСНС) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.МСНС)) {
-    errors.МСНС = 'Недопустимый формат';
+  if (values.LYM_RELATIVE && !isNumber.test(values.LYM_RELATIVE)) {
+    errors.LYM_RELATIVE = 'Введите число';
   }
 
-  if (!values.RDW) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.RDW)) {
-    errors.RDW = 'Недопустимый формат';
+  if (values.NEU && !isNumber.test(values.NEU)) {
+    errors.NEU = 'Введите число';
   }
 
-  if (!values.MCV) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.MCV)) {
-    errors.MCV = 'Недопустимый формат';
+  if (values.Bands && !isNumber.test(values.Bands)) {
+    errors.Bands = 'Введите число';
   }
 
-  if (!values.RTC) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.RTC)) {
-    errors.RTC = 'Недопустимый формат';
+  if (values.EOS_RELATIVE && !isNumber.test(values.EOS_RELATIVE)) {
+    errors.EOS_RELATIVE = 'Введите число';
   }
 
-  if (!values.PLT) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.PLT)) {
-    errors.PLT = 'Недопустимый формат';
+  if (values.BA_RELATIVE && !isNumber.test(values.BA_RELATIVE)) {
+    errors.BA_RELATIVE = 'Введите число';
   }
 
-  if (!values.WBC) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.WBC)) {
-    errors.WBC = 'Недопустимый формат';
+  if (values.WBC && !isNumber.test(values.WBC)) {
+    errors.WBC = 'Введите число';
   }
 
-  if (!values.BA_RELATIVE) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.BA_RELATIVE)) {
-    errors.BA_RELATIVE = 'Недопустимый формат';
+  if (values.PLT && !isNumber.test(values.PLT)) {
+    errors.PLT = 'Введите число';
   }
 
-  if (!values.EOS_RELATIVE) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.EOS_RELATIVE)) {
-    errors.EOS_RELATIVE = 'Недопустимый формат';
+  if (values.RTC && !isNumber.test(values.RTC)) {
+    errors.RTC = 'Введите число';
   }
 
-  if (!values.Bands) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.Bands)) {
-    errors.Bands = 'Недопустимый формат';
+  if (values.МСНС && !isNumber.test(values.МСНС)) {
+    errors.МСНС = 'Введите число';
   }
 
-  if (!values.NEU) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.NEU)) {
-    errors.NEU = 'Недопустимый формат';
+  if (values.МСН && !isNumber.test(values.МСН)) {
+    errors.МСН = 'Введите число';
   }
 
-  if (!values.LYM_RELATIVE) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.LYM_RELATIVE)) {
-    errors.LYM_RELATIVE = 'Недопустимый формат';
+  if (values.MCV && !isNumber.test(values.MCV)) {
+    errors.MCV = 'Введите число';
   }
 
-  if (!values.MO_RELATIVE) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.MO_RELATIVE)) {
-    errors.MO_RELATIVE = 'Недопустимый формат';
+  if (values.HTC && !isNumber.test(values.HTC)) {
+    errors.HTC = 'Введите число';
   }
 
-  if (!values.ESR) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.ESR)) {
-    errors.ESR = 'Недопустимый формат';
+  if (values.Hb && !isNumber.test(values.Hb)) {
+    errors.Hb = 'Введите число';
   }
 
   if (!values.sex) {
@@ -121,3 +81,5 @@ export const validate = (values) => {
 
   return errors;
 };
+
+export const blank = () => {};

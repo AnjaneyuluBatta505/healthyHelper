@@ -4,7 +4,7 @@ import { Button, Paragraph, Dialog as PaperDialog, Portal, List, Card, Title, Di
 import { View, ScrollView } from 'react-native';
 import update from 'immutability-helper';
 
-import { Indicators } from '../config';
+import { Indicators, LEUKOCYTE_FORMULA } from '../config';
 import { Separator } from '../../../../helpers/layout/List';
 import * as S from './styled';
 
@@ -17,16 +17,17 @@ const IconNames = {
 class Dialog extends Component {
   state = {
     data: Indicators.map(el => ({ ...el, expanded: false })),
+    leukForm: LEUKOCYTE_FORMULA,
   }
 
   handlePress = indx => () => this.setState(({ data }) => ({
     data: update(data, { [indx]: { expanded: { $set: !data[indx].expanded } } }),
   }))
 
-  _getLabel = (label, limits) => {
+  _getLabel = (id, limits, label) => {
     const { values } = this.props;
     const { sex } = values;
-    const res = values[label];
+    const res = values[id];
 
     if (res < limits[sex].minLimit) {
       return `${label} ниже нормы.`;
@@ -44,14 +45,44 @@ class Dialog extends Component {
     const { sex } = values;
 
     if (values[label] < limits[sex].minLimit) {
-      return <S.TitleIcon {...props} name={IconNames.down} size={20} />;
+      return <S.TitleIcon {...props} color="red" name={IconNames.down} size={20} />;
     }
 
     if (values[label] > limits[sex].maxLimit) {
-      return <S.TitleIcon {...props} name={IconNames.up} size={20} />;
+      return <S.TitleIcon {...props} color="red" name={IconNames.up} size={20} />;
     }
 
-    return <S.TitleIcon {...props} name={IconNames.normal} size={20} />;
+    return <S.TitleIcon {...props} color="green" name={IconNames.normal} size={20} />;
+  }
+
+  _getLeukIcon = (label, limits) => {
+    const { values } = this.props;
+    const { sex } = values;
+
+    if (values[label] < limits[sex].minLimit) {
+      return <S.LeukIcon color="red" name={IconNames.down} size={10} />;
+    }
+
+    if (values[label] > limits[sex].maxLimit) {
+      return <S.LeukIcon color="red" name={IconNames.up} size={10} />;
+    }
+
+    return <S.LeukIcon color="green" name={IconNames.normal} size={10} />;
+  }
+
+  _getLeukDescription = (label, limits, less, more) => {
+    const { values } = this.props;
+    const { sex } = values;
+
+    if (values[label] < limits[sex].minLimit) {
+      return less;
+    }
+
+    if (values[label] > limits[sex].maxLimit) {
+      return more;
+    }
+
+    return '';
   }
 
   _getDescription = (label, limits, less, more) => {
@@ -70,8 +101,8 @@ class Dialog extends Component {
   }
 
   render() {
-    const { isVisible, hideDialog } = this.props;
-    const { data } = this.state;
+    const { isVisible, hideDialog, values: { sex, ...rest } } = this.props;
+    const { data, leukForm } = this.state;
 
     return (
       <View>
@@ -88,7 +119,6 @@ class Dialog extends Component {
                 {
                   data.map((elem, indx) => {
                     const { id, limits, ifLess, ifMore, expanded, unit, label } = elem;
-                    const { values: { sex, ...rest } } = this.props;
 
                     if (!rest[id]) {
                       return null;
@@ -97,7 +127,7 @@ class Dialog extends Component {
                     return (
                       <Fragment key={id}>
                         <List.Accordion
-                          title={this._getLabel(id, limits, unit)}
+                          title={label}
                           left={props => this._getIcon(props, id, limits)}
                           expanded={expanded}
                           onPress={this.handlePress(indx)}
@@ -106,24 +136,24 @@ class Dialog extends Component {
                           <Card style={{ paddingLeft: 0 }}>
                             <S.Container>
                               <Title>
-                                {label}
+                                {this._getLabel(id, limits, label)}
                               </Title>
                             </S.Container>
                             <Divider />
                             <S.Container>
                               <Paragraph>
-                              Референсные значения: {limits[sex].minLimit} - {limits[sex].maxLimit}
+                              Референсные значения:
                               </Paragraph>
                               <Paragraph>
-                                {unit}
+                                {limits[sex].minLimit} - {limits[sex].maxLimit}{unit}
                               </Paragraph>
                             </S.Container>
                             <S.Container>
                               <Paragraph>
-                              Результат: {rest[id]}
+                              Результат:
                               </Paragraph>
                               <Paragraph>
-                                {unit}
+                                {rest[id]}{unit}
                               </Paragraph>
                             </S.Container>
                             <Divider />
@@ -139,10 +169,60 @@ class Dialog extends Component {
                     );
                   })
                 }
+                <List.Accordion
+                  title={leukForm.title}
+                  style={{ paddingLeft: 0 }}
+                  expanded={leukForm.expanded}
+                  onPress={() => this.setState(({ leukForm }) => ({
+                    leukForm: update(leukForm, { expanded: { $set: !leukForm.expanded } }),
+                  }))}
+                >
+                  {
+                    leukForm.arguments.map(elem => (
+                      rest[elem.id] && (
+                      <Card key={elem.id} style={{ paddingLeft: 0 }}>
+                        <Separator />
+                        <S.Container>
+                          <Paragraph>
+                          Референсные значения
+                          </Paragraph>
+                        </S.Container>
+                        <S.Container>
+                          <Paragraph>
+                            {elem.label}
+                          </Paragraph>
+                          <Paragraph>
+                            {elem.limits[sex].minLimit} - {elem.limits[sex].maxLimit} {elem.unit}
+                          </Paragraph>
+                        </S.Container>
+                        <Divider />
+                        <S.Container>
+                          <Paragraph>
+                          Результат: {this._getLeukIcon(elem.id, elem.limits)}
+                          </Paragraph>
+                          <Paragraph>
+                            {rest[elem.id]} {elem.unit}
+                          </Paragraph>
+                        </S.Container>
+                        <Divider />
+                        <Card.Content>
+                          <Paragraph>
+                            {this._getLeukDescription(elem.id, elem.limits, elem.ifLess, elem.ifMore)}
+                          </Paragraph>
+                        </Card.Content>
+                      </Card>
+                      )
+                    ))
+                  }
+                </List.Accordion>
+                <Separator />
               </List.Section>
 
               <PaperDialog.Content>
-                <Paragraph>Данные действительны для взрослых мужчин и женщин</Paragraph>
+                <Paragraph>
+                  Результаты расшифровки анализов носят только информационный характер,
+                  не являются диагнозом и не заменяют очную консультацию врача.
+                </Paragraph>
               </PaperDialog.Content>
 
               <PaperDialog.Actions>

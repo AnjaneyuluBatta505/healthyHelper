@@ -23,10 +23,10 @@ class Dialog extends PureComponent {
     data: update(data, { [indx]: { expanded: { $set: !data[indx].expanded } } }),
   }))
 
-  _getLabel = (label, limits) => {
+  _getLabel = (id, limits, label) => {
     const { values } = this.props;
     const { sex } = values;
-    const res = values[label];
+    const res = values[id];
 
     if (res < limits[sex].minLimit) {
       return `${label} ниже нормы.`;
@@ -44,14 +44,14 @@ class Dialog extends PureComponent {
     const { sex } = values;
 
     if (values[label] < limits[sex].minLimit) {
-      return <S.TitleIcon {...props} name={IconNames.down} size={20} />;
+      return <S.TitleIcon {...props} color="red" name={IconNames.down} size={20} />;
     }
 
     if (values[label] > limits[sex].maxLimit) {
-      return <S.TitleIcon {...props} name={IconNames.up} size={20} />;
+      return <S.TitleIcon {...props} color="red" name={IconNames.up} size={20} />;
     }
 
-    return <S.TitleIcon {...props} name={IconNames.normal} size={20} />;
+    return <S.TitleIcon {...props} color="green" name={IconNames.normal} size={20} />;
   }
 
   _getDescription = (label, limits, less, more) => {
@@ -66,7 +66,7 @@ class Dialog extends PureComponent {
       return more;
     }
 
-    return '';
+    return 'Показатель в норме';
   }
 
   render() {
@@ -97,7 +97,7 @@ class Dialog extends PureComponent {
                     return (
                       <Fragment key={id}>
                         <List.Accordion
-                          title={this._getLabel(id, limits)}
+                          title={label}
                           left={props => this._getIcon(props, id, limits)}
                           expanded={expanded}
                           onPress={this.handlePress(indx)}
@@ -106,24 +106,24 @@ class Dialog extends PureComponent {
                           <Card style={{ paddingLeft: 0 }}>
                             <S.Container>
                               <Title>
-                                {label}
+                                {this._getLabel(id, limits, label)}
                               </Title>
                             </S.Container>
                             <Divider />
                             <S.Container>
                               <Paragraph>
-                              Референсные значения: {limits[sex].minLimit} - {limits[sex].maxLimit}
+                              Референсные значения:
                               </Paragraph>
                               <Paragraph>
-                                {unit}
+                                {limits[sex].minLimit} - {limits[sex].maxLimit}{unit}
                               </Paragraph>
                             </S.Container>
                             <S.Container>
                               <Paragraph>
-                              Результат: {rest[id]}
+                              Результат:
                               </Paragraph>
                               <Paragraph>
-                                {unit}
+                                {rest[id]} {unit}
                               </Paragraph>
                             </S.Container>
                             <Divider />
@@ -142,7 +142,10 @@ class Dialog extends PureComponent {
               </List.Section>
 
               <PaperDialog.Content>
-                <Paragraph>Данные действительны для взрослых мужчин и женщин</Paragraph>
+                <Paragraph>
+                  Результаты расшифровки анализов носят только информационный характер,
+                  не являются диагнозом и не заменяют очную консультацию врача.
+                </Paragraph>
               </PaperDialog.Content>
 
               <PaperDialog.Actions>

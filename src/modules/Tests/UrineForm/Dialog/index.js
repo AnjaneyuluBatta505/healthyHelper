@@ -58,24 +58,24 @@ class Dialog extends PureComponent {
     const { sex } = values;
 
     if (values[label] < limits[sex].minLimit) {
-      return <S.TitleIcon {...props} name={IconNames.down} size={20} />;
+      return <S.TitleIcon {...props} color="red" name={IconNames.down} size={20} />;
     }
 
     if (values[label] > limits[sex].maxLimit) {
-      return <S.TitleIcon {...props} name={IconNames.up} size={20} />;
+      return <S.TitleIcon {...props} color="red" name={IconNames.up} size={20} />;
     }
 
-    return <S.TitleIcon {...props} name={IconNames.normal} size={20} />;
+    return <S.TitleIcon {...props} color="green" name={IconNames.normal} size={20} />;
   }
 
   _getRadioIcon = (props, curValue, reference) => {
     const { values } = this.props;
 
     if (values[curValue] === reference) {
-      return <S.TitleIcon {...props} name={IconNames.normal} size={20} />;
+      return <S.TitleIcon {...props} color="green" name={IconNames.normal} size={20} />;
     }
 
-    return <S.TitleIcon {...props} name={IconNames.error} size={20} />;
+    return <S.TitleIcon {...props} color="red" name={IconNames.error} size={20} />;
   }
 
   _getDescription = (label, limits, less, more) => {

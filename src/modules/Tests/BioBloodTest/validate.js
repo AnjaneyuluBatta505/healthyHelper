@@ -1,119 +1,60 @@
-// import { Indicators } from './config';
-
-export const undefCheck = value => typeof value !== 'undefined';
-
-const numbCheck = value => Number.isNaN(parseInt(value, 10));
+import { isNumber } from '../../../helpers/regexp';
 
 export const validate = (values) => {
   const errors = {};
 
-  if (!values.RBC) {
-    // errors.RBC = 'Обязательное поле';
-  } else if (numbCheck(values.RBC)) {
-    errors.RBC = 'Недопустимый формат';
+  if (values.BELOK && !isNumber.test(values.BELOK)) {
+    errors.BELOK = 'Введите число';
   }
 
-  if (!values.Hb) {
-    // errors.Hb = 'Обязательное поле';
-  } else if (numbCheck(values.Hb)) {
-    errors.Hb = 'Недопустимый формат';
+  if (values.hemoglobin && !isNumber.test(values.hemoglobin)) {
+    errors.hemoglobin = 'Введите число';
   }
 
-  if (!values.HTC) {
-    // errors.HTC = 'Обязательное поле';
-  } else if (numbCheck(values.HTC)) {
-    errors.HTC = 'Недопустимый формат';
+  if (values.haptoglobin && !isNumber.test(values.haptoglobin)) {
+    errors.haptoglobin = 'Введите число';
   }
 
-  if (!values.MCV) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.MCV)) {
-    errors.MCV = 'Недопустимый формат';
+  if (values.glucose && !isNumber.test(values.glucose)) {
+    errors.glucose = 'Введите число';
   }
 
-  if (!values.МСН) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.МСН)) {
-    errors.МСН = 'Недопустимый формат';
+  if (values.creatinine && !isNumber.test(values.creatinine)) {
+    errors.creatinine = 'Введите число';
   }
 
-  if (!values.МСНС) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.МСНС)) {
-    errors.МСНС = 'Недопустимый формат';
+  if (values.urea && !isNumber.test(values.urea)) {
+    errors.urea = 'Введите число';
   }
 
-  if (!values.RDW) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.RDW)) {
-    errors.RDW = 'Недопустимый формат';
+  if (values.cholesterol && !isNumber.test(values.cholesterol)) {
+    errors.cholesterol = 'Введите число';
   }
 
-  if (!values.MCV) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.MCV)) {
-    errors.MCV = 'Недопустимый формат';
+  if (values.bilirubin && !isNumber.test(values.bilirubin)) {
+    errors.bilirubin = 'Введите число';
   }
 
-  if (!values.RTC) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.RTC)) {
-    errors.RTC = 'Недопустимый формат';
+  if (values.ALT && !isNumber.test(values.ALT)) {
+    errors.ALT = 'Введите число';
   }
 
-  if (!values.PLT) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.PLT)) {
-    errors.PLT = 'Недопустимый формат';
+  if (values.АСТ && !isNumber.test(values.АСТ)) {
+    errors.АСТ = 'Введите число';
   }
 
-  if (!values.WBC) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.WBC)) {
-    errors.WBC = 'Недопустимый формат';
+  if (values.lipase && !isNumber.test(values.lipase)) {
+    errors.lipase = 'Введите число';
   }
 
-  if (!values.BA_RELATIVE) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.BA_RELATIVE)) {
-    errors.BA_RELATIVE = 'Недопустимый формат';
+  if (values.alphaAmylase && !isNumber.test(values.alphaAmylase)) {
+    errors.alphaAmylase = 'Введите число';
   }
 
-  if (!values.EOS_RELATIVE) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.EOS_RELATIVE)) {
-    errors.EOS_RELATIVE = 'Недопустимый формат';
+  if (values.pancreaticAmylase && !isNumber.test(values.pancreaticAmylase)) {
+    errors.pancreaticAmylase = 'Введите число';
   }
 
-  if (!values.Bands) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.Bands)) {
-    errors.Bands = 'Недопустимый формат';
-  }
-
-  if (!values.NEU) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.NEU)) {
-    errors.NEU = 'Недопустимый формат';
-  }
-
-  if (!values.LYM_RELATIVE) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.LYM_RELATIVE)) {
-    errors.LYM_RELATIVE = 'Недопустимый формат';
-  }
-
-  if (!values.MO_RELATIVE) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.MO_RELATIVE)) {
-    errors.MO_RELATIVE = 'Недопустимый формат';
-  }
-
-  if (!values.ESR) {
-    // errors.MCV = 'Обязательное поле';
-  } else if (numbCheck(values.ESR)) {
-    errors.ESR = 'Недопустимый формат';
-  }
 
   if (!values.sex) {
     errors.sex = 'Обязательное поле';
@@ -121,3 +62,5 @@ export const validate = (values) => {
 
   return errors;
 };
+
+export const blank = () => {};

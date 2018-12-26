@@ -78,7 +78,7 @@ class BloodForm extends Component {
                       })
                     }
                     <Field name="sex" value="man" type="radio">
-                      {({ input }) => (
+                      {({ input, meta: { error, touched } }) => (
                         <S.RadioWrap>
                           <Text>М</Text>
                           <S.RadioBtn
@@ -87,11 +87,21 @@ class BloodForm extends Component {
                             status={values.sex === 'man' ? 'checked' : 'unchecked'}
                             onPress={() => input.onChange('man')}
                           />
+                          {
+                          error && touched && (
+                            <S.UnitText
+                              type="error"
+                              visible="true"
+                            >
+                              {error}
+                            </S.UnitText>
+                          )
+                          }
                         </S.RadioWrap>
                       )}
                     </Field>
                     <Field name="sex" value="woman" type="radio">
-                      {({ input }) => (
+                      {({ input, meta: { error, touched } }) => (
                         <S.RadioWrap>
                           <Text>Ж</Text>
                           <S.RadioBtn
@@ -100,6 +110,16 @@ class BloodForm extends Component {
                             status={values.sex === 'woman' ? 'checked' : 'unchecked'}
                             onPress={() => input.onChange('woman')}
                           />
+                          {
+                          error && touched && (
+                            <S.UnitText
+                              type="error"
+                              visible="true"
+                            >
+                              {error}
+                            </S.UnitText>
+                          )
+                          }
                         </S.RadioWrap>
                       )}
                     </Field>

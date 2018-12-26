@@ -12,6 +12,15 @@ export const TitleIcon = styled(CustomIcon)`
   width: 20px;
 `;
 
+export const LeukIcon = styled(CustomIcon)`
+  display: flex;
+  alignItems: center;
+  justifyContent: center;
+  marginTop: 10px;
+  height: 10px;
+  width: 10px;
+`;
+
 export const Container = styled(Card.Content)`
   display: flex;
   alignItems: flex-end;

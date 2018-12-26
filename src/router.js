@@ -27,15 +27,15 @@ const headerStyles = {
 
 const HomeStack = createStackNavigator(
   {
-    Overview,
     AltMedicine,
     BioBloodTest,
     BloodForm,
     Drug,
     Drugs,
+    Home: Overview,
     Interaction,
     ListOfDrugs,
-    Home: Tests,
+    Tests,
     UrineForm,
   },
   headerStyles,
